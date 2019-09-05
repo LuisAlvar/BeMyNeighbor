@@ -51,16 +51,44 @@ alter table [Users].[User]
 
 alter table [Users].[User]
     add CONSTRAINT User_Address_FK FOREIGN KEY (AddressID) REFERENCES [Location].[Address] (AddressID);   
+    
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [Location].[GeoLocation](
+	[GeoLocationID] [int] IDENTITY(30,1) NOT NULL,
+	[Latitude] [decimal](12, 9) NOT NULL,
+	[Longitude] [decimal](12, 9) NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [Location].[GeoLocation] ADD  CONSTRAINT [Geo_Location_PK] PRIMARY KEY CLUSTERED 
+(
+	[GeoLocationID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
 
-create table [Communities].[Community](
-  CommunityID int IDENTITY(1,1),
-  CommunityName nvarchar(50) not null, 
-  GeoLocation nvarchar(30) not null,
-  Radius decimal(5,2) not null
-)
-
-alter table [Communities].[Community]
-  add CONSTRAINT Community_PK PRIMARY KEY (CommunityID);
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [Communities].[Community](
+	[CommunityID] [int] IDENTITY(10,1) NOT NULL,
+	[CommunityName] [nvarchar](50) NOT NULL,
+	[LocationID] [int] NOT NULL,
+	[Radius] [decimal](5, 2) NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [Communities].[Community] ADD  CONSTRAINT [Community_PK] PRIMARY KEY CLUSTERED 
+(
+	[CommunityID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [Communities].[Community]  WITH CHECK ADD  CONSTRAINT [Community_GeoLocation_FK] FOREIGN KEY([LocationID])
+REFERENCES [Location].[GeoLocation] ([GeoLocationID])
+GO
+ALTER TABLE [Communities].[Community] CHECK CONSTRAINT [Community_GeoLocation_FK]
+GO
 
 create table [Posts].[Post](
   PostID int IDENTITY(1,1),
@@ -78,25 +106,6 @@ alter table [Posts].[Post]
 
 alter table [Posts].[Post]
   add CONSTRAINT GeoLocation_FK FOREIGN KEY (GeoLocationID) REFERENCES [Location].[GeoLocation] (GeoLocationID);
-
-
-alter table [Communities].[Community] add Radius decimal(5,2) not null
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [Location].[GeoLocation](
-	[GeoLocationID] [int] IDENTITY(30,1) NOT NULL,
-	[Latitude] [decimal](12, 9) NOT NULL,
-	[Longitude] [decimal](12, 9) NOT NULL
-) ON [PRIMARY]
-GO
-ALTER TABLE [Location].[GeoLocation] ADD  CONSTRAINT [Geo_Location_PK] PRIMARY KEY CLUSTERED 
-(
-	[GeoLocationID] ASC
-)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
-GO
 
 create table [Tasks].[Task] (
   TaskTypeID int identity (100,10) not null,
