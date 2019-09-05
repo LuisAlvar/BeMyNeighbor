@@ -64,7 +64,7 @@ alter table [Communities].[Community]
 
 create table [Posts].[Post](
   PostID int IDENTITY(1,1),
-  GeoLocation nvarchar(30) not null,
+  GeoLocationID int not null,
   CommunityID int not null, 
   DatePosted DATETIME2 not null, 
   TaskTypeID int not null
@@ -75,3 +75,9 @@ alter table [Posts].[Post]
 
 alter table [Posts].[Post]
   add CONSTRAINT CommunityID_FK FOREIGN KEY (CommunityID) REFERENCES [Communities].[Community] (CommunityID);
+
+alter table [Posts].[Post]
+  add CONSTRAINT GeoLocation_FK FOREIGN KEY (GeoLocationID) REFERENCES [Location].[GeoLocation] (GeoLocationID);
+
+
+alter table [Communities].[Community] add Radius decimal(5,2) not null
