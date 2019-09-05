@@ -81,3 +81,19 @@ alter table [Posts].[Post]
 
 
 alter table [Communities].[Community] add Radius decimal(5,2) not null
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [Location].[GeoLocation](
+	[GeoLocationID] [int] IDENTITY(30,1) NOT NULL,
+	[Latitude] [decimal](12, 9) NOT NULL,
+	[Longitude] [decimal](12, 9) NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [Location].[GeoLocation] ADD  CONSTRAINT [Geo_Location_PK] PRIMARY KEY CLUSTERED 
+(
+	[GeoLocationID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
