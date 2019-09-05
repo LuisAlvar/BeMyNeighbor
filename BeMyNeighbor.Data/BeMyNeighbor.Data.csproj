@@ -1,10 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\BeMyNeighbor.Domain\BeMyNeighbor.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="microsoft.entityframeworkcore" Version="2.2.6" />
     <PackageReference Include="microsoft.entityframeworkcore.design" Version="2.2.6" />
     <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.2.6" />
