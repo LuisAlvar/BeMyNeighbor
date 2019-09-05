@@ -5,7 +5,7 @@ namespace BeMyNeighbor.Models.DbModels{
 
 
 		private static DbManager instance;
-		private static BeMyNeighborDBContext _dbConnection;
+		public BeMyNeighborDBContext _dbConnection;
 
 		private DbManager(){
 			_dbConnection = new BeMyNeighborDBContext(); 
