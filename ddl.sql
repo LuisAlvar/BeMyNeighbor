@@ -52,3 +52,26 @@ alter table [Users].[User]
 alter table [Users].[User]
     add CONSTRAINT User_Address_FK FOREIGN KEY (AddressID) REFERENCES [Location].[Address] (AddressID);   
 
+create table [Communities].[Community](
+  CommunityID int IDENTITY(1,1),
+  CommunityName nvarchar(50) not null, 
+  GeoLocation nvarchar(30) not null,
+  Radius decimal(5,2) not null
+)
+
+alter table [Communities].[Community]
+  add CONSTRAINT Community_PK PRIMARY KEY (CommunityID);
+
+create table [Posts].[Post](
+  PostID int IDENTITY(1,1),
+  GeoLocation nvarchar(30) not null,
+  CommunityID int not null, 
+  DatePosted DATETIME2 not null, 
+  TaskTypeID int not null
+);
+
+alter table [Posts].[Post]
+  add CONSTRAINT Post_PK PRIMARY KEY (PostID);
+
+alter table [Posts].[Post]
+  add CONSTRAINT CommunityID_FK FOREIGN KEY (CommunityID) REFERENCES [Communities].[Community] (CommunityID);
