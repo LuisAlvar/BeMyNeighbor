@@ -52,3 +52,103 @@ alter table [Users].[User]
 alter table [Users].[User]
     add CONSTRAINT User_Address_FK FOREIGN KEY (AddressID) REFERENCES [Location].[Address] (AddressID);   
 
+create table [Communities].[Community](
+  CommunityID int IDENTITY(1,1),
+  CommunityName nvarchar(50) not null, 
+  GeoLocation nvarchar(30) not null,
+  Radius decimal(5,2) not null
+)
+
+alter table [Communities].[Community]
+  add CONSTRAINT Community_PK PRIMARY KEY (CommunityID);
+
+create table [Posts].[Post](
+  PostID int IDENTITY(1,1),
+  GeoLocationID int not null,
+  CommunityID int not null, 
+  DatePosted DATETIME2 not null, 
+  TaskTypeID int not null
+);
+
+alter table [Posts].[Post]
+  add CONSTRAINT Post_PK PRIMARY KEY (PostID);
+
+alter table [Posts].[Post]
+  add CONSTRAINT CommunityID_FK FOREIGN KEY (CommunityID) REFERENCES [Communities].[Community] (CommunityID);
+
+alter table [Posts].[Post]
+  add CONSTRAINT GeoLocation_FK FOREIGN KEY (GeoLocationID) REFERENCES [Location].[GeoLocation] (GeoLocationID);
+
+
+alter table [Communities].[Community] add Radius decimal(5,2) not null
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [Location].[GeoLocation](
+	[GeoLocationID] [int] IDENTITY(30,1) NOT NULL,
+	[Latitude] [decimal](12, 9) NOT NULL,
+	[Longitude] [decimal](12, 9) NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [Location].[GeoLocation] ADD  CONSTRAINT [Geo_Location_PK] PRIMARY KEY CLUSTERED 
+(
+	[GeoLocationID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
+
+create table [Tasks].[Task] (
+  TaskTypeID int identity (100,10) not null,
+  TaskDescription nvarchar (50),
+  TaskTypeRewardPoints int not null
+);
+
+alter table [Tasks].[Task]
+  add CONSTRAINT Task_PK PRIMARY KEY (TaskTypeID);
+
+alter table [Posts].[Post]
+  add CONSTRAINT TaskType_FK FOREIGN KEY (TaskTypeID) REFERENCES [Tasks].[Task] (TaskTypeID);
+
+create table [Evaluation].[Questions](
+    QuestionID int identity (100,2) not null,
+    QuestionText nvarchar (max) not null,
+);
+
+alter table [Evaluation].[Questions]
+  add CONSTRAINT Task_PK PRIMARY KEY (QuestionID);
+
+create table [Evaluation].[UsersEvaluation](
+    EvaluationID int identity (1000,1) not null,
+    PostID int not null,
+    TaskTypeID int not null,
+    UserID int not null,
+    TotalScore int not null
+);
+
+alter table [Evaluation].[UsersEvaluation]
+  add CONSTRAINT UserEval_PK PRIMARY KEY (EvaluationID);
+
+alter table [Evaluation].[UsersEvaluation]
+  add CONSTRAINT User_Evaluation_FK FOREIGN KEY (UserID) REFERENCES [Users].[User] (UserID);
+alter table [Evaluation].[UsersEvaluation]
+  add CONSTRAINT Post_FK FOREIGN KEY (PostID) REFERENCES [Posts].[Post] (PostID);
+alter table [Evaluation].[UsersEvaluation]
+  add CONSTRAINT Task_FK FOREIGN KEY (TaskTypeID) REFERENCES [Tasks].[Task] (TaskTypeID);
+
+create table [Evaluation].[EvaluationQuestions](
+  EvaluationID int not null,
+  QuestionID int not null,
+  QuestionScore int not null,
+  QuestionAnswer nvarchar(max) null
+);
+
+alter table [Evaluation].[EvaluationQuestions]
+  add CONSTRAINT Eval_Quest_PK PRIMARY KEY (EvaluationID,QuestionID);
+
+alter table [Evaluation].[EvaluationQuestions]
+  add CONSTRAINT Questions_UserEvaluation_FK FOREIGN KEY (EvaluationID) 
+  REFERENCES [Evaluation].[UsersEvaluation] (EvaluationID);
+
+alter table [Evaluation].[EvaluationQuestions]
+  add CONSTRAINT Question_EvalQuestion_FK FOREIGN KEY (QuestionID) REFERENCES [Evaluation].[Questions] (QuestionID);
