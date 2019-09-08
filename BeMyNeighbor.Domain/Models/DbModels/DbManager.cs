@@ -2,19 +2,14 @@ using BeMyNeighbor.Data.Entities;
 
 namespace BeMyNeighbor.Models.DbModels{
 	public class DbManager{
-
-
-		private static DbManager instance;
-		public BeMyNeighborDBContext _dbConnection;
-
+		private static BeMyNeighborDBContext _dbConnection;
 		private DbManager(){
-			_dbConnection = new BeMyNeighborDBContext(); 
 		}
-		public static DbManager GetInstance(){
-			if (instance == null){ 
-      	instance = new DbManager();
+		public static BeMyNeighborDBContext GetInstance(){
+			if (_dbConnection == null){ 
+      	_dbConnection = new BeMyNeighborDBContext();
     	} 
-    	return instance; 
+    	return _dbConnection; 
   	}	
 	}
 }
