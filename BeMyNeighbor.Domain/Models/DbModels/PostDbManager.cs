@@ -15,15 +15,18 @@ namespace BeMyNeighbor.Models.DbModels{
         Longitude = newPostInfo.lon,
       });
       var lastGeolocationRecord = DbManager.GetInstance().GeoLocation.Last();
+      var setDateTime = DateTime.Now;
 
       DbManager.GetInstance().Post.Add(new Post(){
         GeoLocationId = lastGeolocationRecord.GeoLocationId,
         CommunityId =  newPostInfo.CommunityId,
-        DatePosted =  DateTime.Now,
-        // DateModified = DateTime.Now,
-        // UserId = newPostInfo.userId,
+        DatePosted =  setDateTime,
+        DateModified = setDateTime,
+        UserId = newPostInfo.userId,
+        DoneFlag = false,
         TaskTypeId = newPostInfo.tasktypeId
       });
+
       DbManager.GetInstance().SaveChanges();
     }
     //Fetching 
@@ -68,7 +71,6 @@ namespace BeMyNeighbor.Models.DbModels{
     public int CommunityId { get; set; }
     public decimal lat { get; set; }
     public decimal lon { get; set; }
-    public string taskDescription { get; set; }
     public int tasktypeId { get; set; }
     public int userId { get; set; }
   }
