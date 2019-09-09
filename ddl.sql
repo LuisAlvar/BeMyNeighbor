@@ -95,7 +95,9 @@ create table [Posts].[Post](
   GeoLocationID int not null,
   CommunityID int not null, 
   DatePosted DATETIME2 not null, 
-  TaskTypeID int not null
+  DateModified DATETIME2 not null,
+  TaskTypeID int not null,
+  UserId int not null
 );
 
 alter table [Posts].[Post]
@@ -106,6 +108,9 @@ alter table [Posts].[Post]
 
 alter table [Posts].[Post]
   add CONSTRAINT GeoLocation_FK FOREIGN KEY (GeoLocationID) REFERENCES [Location].[GeoLocation] (GeoLocationID);
+
+alter table [Posts].[Post]
+  add CONSTRAINT UserId_FK FOREIGN KEY (UserID) REFERENCES [Users].[User] (UserID);
 
 create table [Tasks].[Task] (
   TaskTypeID int identity (100,10) not null,
