@@ -97,6 +97,7 @@ create table [Posts].[Post](
   DatePosted DATETIME2 not null, 
   DateModified DATETIME2 not null,
   TaskTypeID int not null,
+  DoneFlag bit not null, 
   UserID int not null
 );
 
