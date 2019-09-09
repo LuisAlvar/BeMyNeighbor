@@ -125,6 +125,10 @@ namespace BeMyNeighbor.Data.Entities
 
                 entity.Property(e => e.TaskTypeId).HasColumnName("TaskTypeID");
 
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.Property(e => e.UserSelectedId).HasColumnName("UserSelectedID");
+
                 entity.HasOne(d => d.Community)
                     .WithMany(p => p.Post)
                     .HasForeignKey(d => d.CommunityId)
@@ -142,6 +146,18 @@ namespace BeMyNeighbor.Data.Entities
                     .HasForeignKey(d => d.TaskTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("TaskType_FK");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PostUser)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("UserPost_FK");
+
+                entity.HasOne(d => d.UserSelected)
+                    .WithMany(p => p.PostUserSelected)
+                    .HasForeignKey(d => d.UserSelectedId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("User_Selected_Post_FK");
             });
 
             modelBuilder.Entity<Questions>(entity =>
