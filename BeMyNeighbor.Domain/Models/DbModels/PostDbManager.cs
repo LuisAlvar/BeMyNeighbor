@@ -2,14 +2,14 @@ using BeMyNeighbor.Data.Entities;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-
+using BeMyNeighbor.Domain.Models;
 
 namespace BeMyNeighbor.Models.DbModels{
   public class PostDbManager{
     private PostDbManager(){}
 
     //Creation
-    public static void CreatePost(PostCreate newPostInfo){
+    public static void CreatePost(CreatePostViewModel newPostInfo){
       DbManager.GetInstance().GeoLocation.Add(new GeoLocation(){
         Latitude = newPostInfo.lat,
         Longitude = newPostInfo.lon,
@@ -22,7 +22,7 @@ namespace BeMyNeighbor.Models.DbModels{
         CommunityId =  newPostInfo.CommunityId,
         DatePosted =  setDateTime,
         DateModified = setDateTime,
-        UserId = newPostInfo.userId,
+        UserId = CurrentUser.Storage().UserId,
         DoneFlag = false,
         TaskTypeId = newPostInfo.tasktypeId
       });
@@ -51,6 +51,16 @@ namespace BeMyNeighbor.Models.DbModels{
       DbManager.GetInstance().Task.Update(editedTask);
       DbManager.GetInstance().SaveChanges();
     }
+
+    public static void SelectedPost(int id){
+      //the current user can not select his own post 
+      var editPost = DbManager.GetInstance().Post.Single(p => p.PostId == id && p.UserId != CurrentUser.Storage().UserId);
+      editPost.UserSelectedId = CurrentUser.Storage().UserId;
+      editPost.DateSelected = DateTime.Now;
+      DbManager.GetInstance().Post.Update(editPost);
+      DbManager.GetInstance().SaveChanges();
+    }
+
     //Deleting
     public static void DeletePost(int id){
       DbManager.GetInstance().Post.Remove(FindPost(id));
@@ -67,7 +77,7 @@ namespace BeMyNeighbor.Models.DbModels{
 
   }
 
-  public class PostCreate{
+  public class CreatePostViewModel{
     public int CommunityId { get; set; }
     public decimal lat { get; set; }
     public decimal lon { get; set; }
