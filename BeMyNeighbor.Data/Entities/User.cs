@@ -7,8 +7,7 @@ namespace BeMyNeighbor.Data.Entities
     {
         public User()
         {
-            PostUser = new HashSet<Post>();
-            PostUserSelected = new HashSet<Post>();
+            Post = new HashSet<Post>();
             UsersEvaluation = new HashSet<UsersEvaluation>();
         }
 
@@ -25,8 +24,7 @@ namespace BeMyNeighbor.Data.Entities
         public int AddressId { get; set; }
 
         public virtual Address Address { get; set; }
-        public virtual ICollection<Post> PostUser { get; set; }
-        public virtual ICollection<Post> PostUserSelected { get; set; }
+        public virtual ICollection<Post> Post { get; set; }
         public virtual ICollection<UsersEvaluation> UsersEvaluation { get; set; }
     }
 }

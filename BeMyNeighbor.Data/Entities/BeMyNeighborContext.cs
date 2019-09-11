@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BeMyNeighbor.Data.Entities
 {
-    public partial class BeMyNeighborDBContext : DbContext
+    public partial class BeMyNeighborContext : DbContext
     {
-        public BeMyNeighborDBContext()
+        public BeMyNeighborContext()
         {
         }
 
-        public BeMyNeighborDBContext(DbContextOptions<BeMyNeighborDBContext> options)
+        public BeMyNeighborContext(DbContextOptions<BeMyNeighborContext> options)
             : base(options)
         {
         }
@@ -30,7 +30,7 @@ namespace BeMyNeighbor.Data.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=tcp:pizzaslice.database.windows.net,1433;Initial Catalog=BeMyNeighborDB;Persist Security Info=False;User ID=localuser;Password=Password12345;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer("server=localhost;initial catalog=BeMyNeighbor; user id=sa;password=Password12345");
             }
         }
 
@@ -148,16 +148,10 @@ namespace BeMyNeighbor.Data.Entities
                     .HasConstraintName("TaskType_FK");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.PostUser)
+                    .WithMany(p => p.Post)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("UserPost_FK");
-
-                entity.HasOne(d => d.UserSelected)
-                    .WithMany(p => p.PostUserSelected)
-                    .HasForeignKey(d => d.UserSelectedId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("User_Selected_Post_FK");
+                    .HasConstraintName("UserSelectedId_FK");
             });
 
             modelBuilder.Entity<Questions>(entity =>
@@ -189,7 +183,7 @@ namespace BeMyNeighbor.Data.Entities
                 entity.ToTable("User", "Users");
 
                 entity.HasIndex(e => e.Email)
-                    .HasName("UQ__User__A9D10534EE6A78D8")
+                    .HasName("UQ__User__A9D105347CB0E472")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");

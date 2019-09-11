@@ -25,7 +25,6 @@ namespace BeMyNeighbor.Data.Entities
         public virtual GeoLocation GeoLocation { get; set; }
         public virtual Task TaskType { get; set; }
         public virtual User User { get; set; }
-        public virtual User UserSelected { get; set; }
         public virtual ICollection<UsersEvaluation> UsersEvaluation { get; set; }
     }
 }
