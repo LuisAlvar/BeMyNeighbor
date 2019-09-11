@@ -5,9 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BeMyNeighbor.MVCClient.Models;
-using BeMyNeighbor.Models.DbModels;
-using BeMyNeighbor.Data.Entities;
-
 
 namespace BeMyNeighbor.MVCClient.Controllers
 {

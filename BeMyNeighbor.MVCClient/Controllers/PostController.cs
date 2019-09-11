@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using BeMyNeighbor.Models.DbModels;
+using BeMyNeighbor.Domain.Models.DbModels;
 
 namespace BeMyNeighbor.MVCClient.Controllers{
   public class PostController: Controller{
