@@ -7,7 +7,6 @@ using BeMyNeighbor.Domain.Models;
 namespace BeMyNeighbor.Models.DbModels{
   public class PostDbManager{
     private PostDbManager(){}
-
     //Creation
     public static void CreatePost(CreatePostViewModel newPostInfo){
       DbManager.GetInstance().GeoLocation.Add(new GeoLocation(){
