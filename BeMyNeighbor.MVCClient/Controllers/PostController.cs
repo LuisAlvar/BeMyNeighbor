@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using BeMyNeighbor.Domain.Models;
 using BeMyNeighbor.Domain.Models.DbModels;
 
 namespace BeMyNeighbor.MVCClient.Controllers{
@@ -10,17 +11,19 @@ namespace BeMyNeighbor.MVCClient.Controllers{
 
     [HttpGet]
     public IActionResult Create(){
+    
       return View(new CreatePostViewModel());
     }
 
     [HttpPost]
     public IActionResult Create(CreatePostViewModel model){
       PostDbManager.CreatePost(model);
-      return RedirectToAction("Index", "Post");
+      return RedirectToAction("Index", "UseMain");
     }
 
     public IActionResult CommunityPosts(){
-      ViewBag.listOfPosts = PostDbManager.FetchPostsByCommunityId(2);
+      ViewBag.listOfPosts = PostDbManager.FetchPostsByCommunityId(CurrentUser.Storage().CommunityId);
+      
       return View();
     }
 
