@@ -2,8 +2,10 @@ using BeMyNeighbor.Data.Entities;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using BeMyNeighbor.Domain.Models.DbModels;
+using BeMyNeighbor.Domain.Models;
 
-namespace BeMyNeighbor.Domain.Models.DbModels{
+namespace BeMyNeighbor.Models.DbModels{
   public class PostDbManager{
     private PostDbManager(){}
     //Creation
