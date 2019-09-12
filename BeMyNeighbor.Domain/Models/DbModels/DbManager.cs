@@ -1,6 +1,6 @@
 using BeMyNeighbor.Data.Entities;
 
-namespace BeMyNeighbor.Models.DbModels{
+namespace BeMyNeighbor.Domain.Models.DbModels{
 	public class DbManager{
 		private static BeMyNeighborContext _dbConnection;
 		private DbManager(){
