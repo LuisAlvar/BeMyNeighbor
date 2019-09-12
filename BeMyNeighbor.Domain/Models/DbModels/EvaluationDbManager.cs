@@ -61,8 +61,7 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 		public List<UsersEvaluation> ListUserEvaluation(int userID){
 			
 			List <UsersEvaluation> evals = new List<UsersEvaluation>();
-			userID = 1;
-			
+
 			try{
 					evals = DbManager.GetInstance().UsersEvaluation.Include("TaskType")
 						.Include("EvaluationQuestions.Question").ToList().Where(p=> p.UserId == userID).ToList();

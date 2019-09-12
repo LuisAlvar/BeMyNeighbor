@@ -11,8 +11,6 @@ namespace BeMyNeighbor.MVCClient.Controllers
         public IActionResult StartNewEvaluation(){
             return View ("EvaluateUser",QuestionsDbManager.GetInstance().QuestionsList);
         }
-
-        //ViewEvaluationHistory
         public IActionResult ViewEvaluationHistory(){
             
             return View("ViewEvaluationHistory", 
