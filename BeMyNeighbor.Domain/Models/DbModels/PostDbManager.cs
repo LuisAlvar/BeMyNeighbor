@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using BeMyNeighbor.Domain.Models.DbModels;
 using BeMyNeighbor.Domain.Models;
 
-namespace BeMyNeighbor.Models.DbModels{
+namespace BeMyNeighbor.Domain.Models.DbModels{
   public class PostDbManager{
     private PostDbManager(){}
     //Creation
