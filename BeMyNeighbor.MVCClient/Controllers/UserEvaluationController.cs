@@ -12,6 +12,13 @@ namespace BeMyNeighbor.MVCClient.Controllers
             return View ("EvaluateUser",QuestionsDbManager.GetInstance().QuestionsList);
         }
 
+        //ViewEvaluationHistory
+        public IActionResult ViewEvaluationHistory(){
+            
+            return View("ViewEvaluationHistory", 
+            EvaluationDbManager.GetInstance().ListUserEvaluation(CurrentUser.Storage().UserId));
+        }
+
 [HttpPost]
 [ValidateAntiForgeryToken]
         public IActionResult SubmitEvaluation (List<string> QuestionScore,

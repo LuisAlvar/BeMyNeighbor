@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BeMyNeighbor.Data.Entities; 
 using System.Linq;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeMyNeighbor.Domain.Models.DbModels{
 
@@ -20,7 +21,6 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 
 		public bool PushEvaluation(List<string> QuestionScore, int postID, 
 		int userID, int taskTypeID){
-
 			List <EvaluationQuestions> qlist = new List<EvaluationQuestions>();
 			int totalScore =0;
       for (int i=0; i<QuestionScore.Count; i++){
@@ -43,7 +43,8 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 					);
 					DbManager.GetInstance().SaveChanges();
 			}
-			catch (System.Exception){
+			catch (System.Exception ex){
+				System.Console.WriteLine(ex.ToString());
 					return false;
 			}
 			return true;
@@ -55,6 +56,21 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
                        .Where(p => p.PostId == postID)
                        .SingleOrDefault();
 			return checkedEvaluation;
+		}
+
+		public List<UsersEvaluation> ListUserEvaluation(int userID){
+			
+			List <UsersEvaluation> evals = new List<UsersEvaluation>();
+			userID = 1;
+			
+			try{
+					evals = DbManager.GetInstance().UsersEvaluation.Include("TaskType")
+						.Include("EvaluationQuestions.Question").ToList().Where(p=> p.UserId == userID).ToList();
+			}catch(System.Exception ex){
+				System.Console.WriteLine(ex.ToString());
+			}
+			
+			return evals;
 		}
 	}
 }
