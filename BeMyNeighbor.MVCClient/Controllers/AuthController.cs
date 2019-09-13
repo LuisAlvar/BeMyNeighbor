@@ -13,7 +13,8 @@ namespace BeMyNeighbor.MVCClient.Controllers{
     [ValidateAntiForgeryToken]
     public IActionResult SignIn(LocalUser user){
       if(!UserDbManager.GetInstance().SignIn(user)){
-        return RedirectToAction("SignIn","Auth");
+          ViewData["Msg"] = CurrentUser.Storage().Messages.MessageToUser;
+          return View("../Home/Index");
       }
       return RedirectToAction("Index", "Main");
     }
