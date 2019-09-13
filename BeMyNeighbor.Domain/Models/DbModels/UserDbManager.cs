@@ -45,7 +45,7 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
     public bool SignIn(LocalUser user){
       try
       {
-        CurrentUser.Storage().UserDb = DbManager.GetInstance().User.Single(u => u.Username == user.UserDb.Username || u.Email == user.UserDb.Email);
+        CurrentUser.Storage().UserDb = DbManager.GetInstance().User.Single(u => (u.Username == user.UsernameOrEmail || u.Email == user.UsernameOrEmail) && (u.HashedPassword == user.Password));
       }
       catch (System.Exception)
       {
