@@ -6,7 +6,7 @@ using BeMyNeighbor.Domain.Models.DbModels;
 namespace BeMyNeighbor.MVCClient.Controllers{
   public class PostController: Controller{
     public IActionResult Index(){
-      return View();
+      return RedirectToAction("Index", "Home");
     }
 
     [HttpGet]
@@ -22,8 +22,7 @@ namespace BeMyNeighbor.MVCClient.Controllers{
     }
 
     public IActionResult CommunityPosts(){
-      ViewBag.listOfPosts = PostDbManager.FetchPostsByCommunityId(CurrentUser.Storage().CommunityId);
-      
+      ViewBag.listOfPosts = PostDbManager.FetchPostsByCommunityId(CurrentUser.Storage().UserDb.CommunityId);
       return View();
     }
 

@@ -14,7 +14,7 @@ namespace BeMyNeighbor.MVCClient.Controllers
         public IActionResult ViewEvaluationHistory(){
             
             return View("ViewEvaluationHistory", 
-            EvaluationDbManager.GetInstance().ListUserEvaluation(CurrentUser.Storage().UserId));
+            EvaluationDbManager.GetInstance().ListUserEvaluation(CurrentUser.Storage().UserDb.UserId));
         }
 
 [HttpPost]
