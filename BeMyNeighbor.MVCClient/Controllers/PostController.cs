@@ -23,6 +23,7 @@ namespace BeMyNeighbor.MVCClient.Controllers{
 
     public IActionResult CommunityPosts(){
       ViewBag.listOfPosts = PostDbManager.FetchPostsByCommunityId(CurrentUser.Storage().UserDb.CommunityId);
+      
       return View();
     }
 
