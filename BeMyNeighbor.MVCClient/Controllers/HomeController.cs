@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BeMyNeighbor.MVCClient.Models;
+using BeMyNeighbor.Domain.Models;
 
 namespace BeMyNeighbor.MVCClient.Controllers
 {
