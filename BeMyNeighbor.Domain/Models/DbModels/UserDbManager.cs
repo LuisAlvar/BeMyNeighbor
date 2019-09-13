@@ -42,7 +42,20 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 			}
 		}
 
+    public bool SignIn(LocalUser user){
+      try
+      {
+        CurrentUser.Storage().UserDb = DbManager.GetInstance().User.Single(u => u.Username == user.UserDb.Username || u.Email == user.UserDb.Email);
+      }
+      catch (System.Exception)
+      {
+        CurrentUser.Storage().Messages.MessageType = "LoginError";
+        CurrentUser.Storage().Messages.MessageToUser = "Invalid User or Password";
+        return false;
+      }
 
+      return true;
+    }
           
         
     }
