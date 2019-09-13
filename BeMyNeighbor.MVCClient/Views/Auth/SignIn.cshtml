@@ -1,0 +1,36 @@
+@model BeMyNeighbor.Domain.Models.LocalUser;
+
+@{
+  Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-md-center">
+  <div class="col-md-8">
+    <h3>Welcome, back! Please Sign In.</h3>
+    @{
+      @if(@Model.Messages.MessageType == "LoginError"){
+        <div class="alert alert-danger">@Model.Messages.MessageToUser</div>
+      }
+    }
+    <form action="/auth/signin" method="post" novalidate>
+      
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="username" class="form-control" id="username" aria-describedby="usernameHelp" asp-for="@Model.UsernameOrEmail" placeholder="Enter your username or email">
+        <span asp-validation-for="@Model.UsernameOrEmail"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" asp-for="@Model.Password">
+        <span asp-validation-for="@Model.Password"></span>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="AuthRememberMe">
+        <label class="form-check-label" for="AuthRememberMe"><small>Remember Me</small></label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      @Html.AntiForgeryToken()
+    </form>
+  </div>
+</div>
