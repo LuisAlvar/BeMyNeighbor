@@ -22,7 +22,7 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
         CommunityId =  newPostInfo.CommunityId,
         DatePosted =  setDateTime,
         DateModified = setDateTime,
-        UserId = CurrentUser.Storage().UserId,
+        UserId = CurrentUser.Storage().UserDb.UserId,
         DoneFlag = false,
         TaskTypeId = newPostInfo.tasktypeId
       });
@@ -54,8 +54,8 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 
     public static void SelectedPost(int id){
       //the current user can not select his own post 
-      var editPost = DbManager.GetInstance().Post.Single(p => p.PostId == id && p.UserId != CurrentUser.Storage().UserId);
-      editPost.UserSelectedId = CurrentUser.Storage().UserId;
+      var editPost = DbManager.GetInstance().Post.Single(p => p.PostId == id && p.UserId != CurrentUser.Storage().UserDb.UserId);
+      editPost.UserSelectedId = CurrentUser.Storage().UserDb.UserId;
       editPost.DateSelected = DateTime.Now;
       DbManager.GetInstance().Post.Update(editPost);
       DbManager.GetInstance().SaveChanges();
