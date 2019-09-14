@@ -11,18 +11,22 @@
       @if(@Model.Messages.MessageType == "LoginError"){
         <div class="alert alert-danger">@Model.Messages.MessageToUser</div>
       }
+
+      @if(@Model.Messages.MessageType == "SignUpSuccessful"){
+        <div class="alert alert-success">@Model.Messages.MessageToUser</div>
+      }
     }
-    <form action="/auth/signin" method="post" novalidate>
+    <form action="/auth/signin" method="post">
       
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="username" class="form-control" id="username" aria-describedby="usernameHelp" asp-for="@Model.UsernameOrEmail" placeholder="Enter your username or email">
+        <label for="usernameoremail">Username or Email</label>
+        <input type="usernameoremail" class="form-control" id="usernameoremail" aria-describedby="usernameoremailHelp" asp-for="@Model.UsernameOrEmail" required>
         <span asp-validation-for="@Model.UsernameOrEmail"></span>
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" asp-for="@Model.Password">
+        <input type="password" class="form-control" id="password" placeholder="Password" asp-for="@Model.Password" required>
         <span asp-validation-for="@Model.Password"></span>
       </div>
       <div class="form-group form-check">
