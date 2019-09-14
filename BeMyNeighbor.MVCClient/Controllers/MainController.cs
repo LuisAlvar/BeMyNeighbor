@@ -14,7 +14,6 @@ namespace BeMyNeighbor.MVCClient.Controllers{
     [HttpPost]
     public void SelectedCommunity(LocalUser info){
       //here is where we are going to verify the user 
-      var infosd = info;  
     }
 
   }
