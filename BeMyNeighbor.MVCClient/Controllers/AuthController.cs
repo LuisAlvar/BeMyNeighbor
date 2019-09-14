@@ -6,7 +6,7 @@ using BeMyNeighbor.Data.Entities;
 namespace BeMyNeighbor.MVCClient.Controllers{
   public class AuthController: Controller{
     [HttpGet]
-    public IActionResult SignIn(){
+    public ViewResult SignIn(){
       //clean good or bad messaages
       if(CurrentUser.Storage().Messages.DestinationType != "/Auth/SignIn"){
         CurrentUser.Storage().CleanMessages();
@@ -24,7 +24,7 @@ namespace BeMyNeighbor.MVCClient.Controllers{
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult SignUp(LocalUser newUser){
+    public RedirectToActionResult SignUp(LocalUser newUser){
       if(UserDbManager.GetInstance().SignUp(newUser)){
         //sign up successfuly 
         return RedirectToAction("SignIn", "Auth");
@@ -35,11 +35,17 @@ namespace BeMyNeighbor.MVCClient.Controllers{
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult SignIn(LocalUser user){
+    public RedirectToActionResult SignIn(LocalUser user){
       if(!UserDbManager.GetInstance().SignIn(user)){
           return RedirectToAction("SignIn", "Auth");
       }
+      var curr = CurrentUser.Storage();
       return RedirectToAction("Index", "Main");
+    }
+
+    public RedirectToActionResult Logout(){
+      CurrentUser.DeleteStorage();
+      return RedirectToAction("Index", "Home");
     }
   }
 }

@@ -27,11 +27,11 @@
         </fieldset>
         <fieldset class="form-group">
               <legend>User Address Info:</legend>
-              <label for="Stname">Street Name:</label> <input class="form-control" type="text" asp-for="@Model.AddressDb.StreetName" id ="Stname" required>
-              <label for="cityName">City:</label> <input class="form-control" type="text" asp-for="@Model.AddressDb.City" id ="cityName" required>  
-              <label for="zipCode">Zipcode:</label> <input class="form-control" type="text" asp-for="@Model.AddressDb.Zipcode" id ="zipCode" required>
+              <label for="Stname">Street Name:</label> <input class="form-control" type="text" asp-for="@Model.UserDb.Address.StreetName" id ="Stname" required>
+              <label for="cityName">City:</label> <input class="form-control" type="text" asp-for="@Model.UserDb.Address.City" id ="cityName" required>  
+              <label for="zipCode">Zipcode:</label> <input class="form-control" type="text" asp-for="@Model.UserDb.Address.Zipcode" id ="zipCode" required>
               <label>Select State Province: </label>
-              <select class="form-control" asp-for="@Model.AddressDb.StateProvince" required>
+              <select class="form-control" asp-for="@Model.UserDb.Address.StateProvince" required>
                   <option value="AL">Alabama</option>
                   <option value="AK">Alaska</option>
                   <option value="AZ">Arizona</option>

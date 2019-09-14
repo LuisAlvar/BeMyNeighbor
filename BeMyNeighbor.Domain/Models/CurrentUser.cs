@@ -20,7 +20,9 @@ namespace BeMyNeighbor.Domain.Models{
       _user = signinUser;
     } 
 
-    public Messages Messages { get; set; }
+    public static void DeleteStorage(){
+      _user = new LocalUser();
+    }
 
   }
 

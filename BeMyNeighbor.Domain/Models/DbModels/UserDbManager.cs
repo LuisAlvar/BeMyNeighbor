@@ -47,6 +47,7 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
       try
       {
         CurrentUser.Storage().UserDb = DbManager.GetInstance().User.Single(u => (u.Username == user.UsernameOrEmail || u.Email == user.UsernameOrEmail) && (u.HashedPassword == user.Password));
+        CurrentUser.Storage().UserDb.Address =  DbManager.GetInstance().Address.Single(a => a.AddressId == CurrentUser.Storage().UserDb.AddressId);
       }
       catch (System.Exception)
       {
@@ -65,7 +66,7 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
         DbManager.GetInstance().User.Add(new User{
             Firstname = user.UserDb.Firstname,
             Lastname = user.UserDb.Lastname,
-            Address = user.AddressDb,
+            Address = user.UserDb.Address,
             Username = user.UserDb.Username,
             HashedPassword = user.Password,
             SeedPassword = user.Password,
