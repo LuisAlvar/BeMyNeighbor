@@ -1,0 +1,35 @@
+@model BeMyNeighbor.Domain.Models.LocalUser;
+
+<div class="row justify-content-md-center">
+  <div class="col-md-8">
+    @{
+      var stringGreeting = $"Welcome to BeMyNeighbor, {@Model.UserDb.Firstname} {@Model.UserDb.Lastname}!";
+      <h4 class="text-center">@stringGreeting</h4>
+    }
+    <h6 class="text-center">Please select a community in @Model.UserDb.Address.City</h6>
+  </div>
+</div>
+
+<div class="row justify-content-md-center">
+  <div class="col-md-5">
+
+    <form class="d-flex flex-column justify-content-center ml-5" method="Post" action="/main/selectedcommunity">
+      @if(true){
+        <div class="alert alert-danger text-center">You did not select a community</div>
+      }
+      <fieldset name="CommunityRadioButtons" class="form-group" required>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input type="radio" aria-label="Radio button for following text input" value="1" asp-for="@Model.SelectedCommunity">
+            </div>
+          </div>
+          <label type="text" class="form-control">Liv+</label>
+        </div>
+
+      </fieldset>
+      <button type="submit" class="btn btn-outline-primary float-right">Selected</button>
+    </form>
+  </div>
+</div>
