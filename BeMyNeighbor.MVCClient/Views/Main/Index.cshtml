@@ -4,25 +4,18 @@
   Layout = "../Shared/_UserMainLayout.cshtml";
 }
 
-@{
-  @if(!@Model.UserDb.VerifiedUser){
-    //Present the user will a list of communities for the first time
-    @Html.Partial("./_SelectCommunity.cshtml", @Model);
-  }else{
-    //Present main content
-    <div class="UserMainContent">
-        <div class="UserProfile">
-          <p>UserProfile</p>
-        </div>
 
-        <div class="Map">
-          <p>Map</p>
-        </div>
-
-        <div class="PostFeed">
-          <p>PostFeed</p>
-        </div>
+<div class="UserMainContent">
+    <div class="UserProfile">
+      <p>UserProfile</p>
     </div>
-  }
-}
+
+    <div class="Map">
+      <p>Map</p>
+    </div>
+
+    <div class="PostFeed">
+      <p>PostFeed</p>
+    </div>
+</div>
 

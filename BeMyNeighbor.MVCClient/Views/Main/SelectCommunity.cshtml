@@ -1,0 +1,7 @@
+@model BeMyNeighbor.Domain.Models.LocalUser;
+
+@{
+  Layout = "../Shared/_UserMainLayout.cshtml";
+}
+
+@Html.Partial("./_SelectCommunity.cshtml", @Model);

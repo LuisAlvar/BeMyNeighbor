@@ -87,7 +87,28 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
       }
       return true;
     }
-          
+
+
+    public bool UserSelectedCommunity(int communityId){
+      CurrentUser.Storage().Messages.SourceType = "/Auth/SelectedCommunity";
+      try
+      {
+        var userId = CurrentUser.Storage().UserDb.UserId;
+        CurrentUser.Storage().UserDb.CommunityId = communityId;
+        CurrentUser.Storage().UserDb.VerifiedUser = true;
+        DbManager.GetInstance().User.Update(CurrentUser.Storage().UserDb);
+        DbManager.GetInstance().SaveChanges();
+        CurrentUser.Storage().UserDb = DbManager.GetInstance().User.Single(u => u.UserId == userId);
+      }
+      catch (System.Exception)
+      {
+        CurrentUser.Storage().Messages.MessageType = "ErrorUpdatingCommunityOfUser";
+        CurrentUser.Storage().Messages.MessageToUser = "We are unable to change your community right now.";
+        CurrentUser.Storage().Messages.DestinationType = "/Main/Index";
+        return false;
+      }
+      return true;
+    } 
         
     }
 }

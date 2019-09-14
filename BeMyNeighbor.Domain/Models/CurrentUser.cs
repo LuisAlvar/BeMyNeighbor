@@ -36,7 +36,7 @@ namespace BeMyNeighbor.Domain.Models{
     public string Password { get; set; }
     [Required(ErrorMessage = "Please enter a username or email!")]
     public string UsernameOrEmail { get; set; }
-    public string SelectedCommunity { get; set; }
+    public int SelectedCommunity { get; set; }
     public LocalUser(){
       UserDb = new User();
       Messages = new Messages();
