@@ -1,0 +1,8 @@
+@model List<BeMyNeighbor.Data.Entities.Task>
+
+
+@foreach (var item in Model)
+{
+		<option value=@item.TaskTypeId>@item.TaskDescription</option>
+}
+
