@@ -8,8 +8,7 @@
       </div>
       <fieldset class="form-group">
         <select class="form-control" asp-for="@Model.TaskTypeId">
-          <option>Select a Job Type</option>
-          <option value="4">Clean my front lawn.</option>
+          @Html.Partial("_TaskTypeOptions.cshtml",BeMyNeighbor.Domain.Models.DbModels.TaskDbManager.GetInstance().TaskTypeList)
         </select>
       </fieldset>
       <button type="submit" class="btn btn-outline-primary float-right">Post Neighbor!</button>

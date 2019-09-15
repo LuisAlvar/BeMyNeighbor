@@ -19,12 +19,14 @@ namespace BeMyNeighbor.Data.Entities
         public DateTime DateModified { get; set; }
         public bool DoneFlag { get; set; }
         public DateTime DateSelected { get; set; }
-        public int UserSelectedId { get; set; }
+        public int? UserSelectedId { get; set; }
+        public string CommentTxt { get; set; }
 
         public virtual Community Community { get; set; }
         public virtual GeoLocation GeoLocation { get; set; }
         public virtual Task TaskType { get; set; }
         public virtual User User { get; set; }
+        public virtual User UserSelected { get; set; }
         public virtual ICollection<UsersEvaluation> UsersEvaluation { get; set; }
     }
 }

@@ -1,0 +1,33 @@
+@model BeMyNeighbor.Data.Entities.User;
+
+<div class="row justify-content-md-center">
+  <div class="col-md-10 justify-content-md-center shadow p-3 mb-5 bg-white rounded">
+    <ul id="Posts" class="list-group row m-1">
+      <li class="list-group-item">
+          <div class="PostContext d-flex">
+            <img height='60'
+                weight='60'
+                class="timeline-image rounded-circle"
+                src="https://static.intercomassets.com/avatars/1143992/square_128/Tiffany-1491608799.jpg?1491608799">
+            <div class="PostText d-flex flex-column ml-3"> 
+              @{
+                var strUser = "@"+Model.Username;
+                <a href="#">@strUser</a>
+              }
+
+              <p>
+                @{
+									 <pre>@Model.Firstname @Model.Lastname</pre>
+									 <pre>@Model.Address.City, @Model.Address.StateProvince</pre>
+                  }
+                
+              </p>
+            </div>
+          </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
