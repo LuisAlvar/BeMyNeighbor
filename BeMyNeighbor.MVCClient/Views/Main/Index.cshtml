@@ -12,7 +12,9 @@
 
     <div class="PostFeed">
       @Html.Partial("../Shared/Post/_PostForm.cshtml", @Model.CreatePostViewModel)
-      @Html.Partial("../Shared/Post/_PostItem.cshtml", @Model.UserDb)
+      @for(var i = 0; i < 3; ++i){
+        @Html.Partial("../Shared/Post/_PostItem.cshtml", @Model.UserDb)
+      }
     </div>
 
     <div class="Map">
