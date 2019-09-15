@@ -1,29 +1,37 @@
 @model BeMyNeighbor.Data.Entities.User;
 
-<ul id="Posts" class="list-group col-md-5">
-  <li class="list-group-item">
-    <form>
-      <div class="PostContext d-flex">
-        <img height='60'
-            weight='60'
-            class="timeline-image rounded-circle"
-            src="https://static.intercomassets.com/avatars/1143992/square_128/Tiffany-1491608799.jpg?1491608799">
-        <div class="PostText d-flex flex-column ml-3"> 
-          @{
-            var strUser = "@"+Model.Username;
-            <a href="#">@strUser</a>
-          }
-          <p>
-            @{
-              if(Model.Lastname != null){
-                @Model.Lastname;
+
+<div class="row justify-content-md-center">
+  <div class="col-md-10 justify-content-md-center shadow p-3 mb-5 bg-white rounded">
+    <ul id="Posts" class="list-group row m-1">
+      <li class="list-group-item">
+        <form>
+          <div class="PostContext d-flex">
+            <img height='60'
+                weight='60'
+                class="timeline-image rounded-circle"
+                src="https://static.intercomassets.com/avatars/1143992/square_128/Tiffany-1491608799.jpg?1491608799">
+            <div class="PostText d-flex flex-column ml-3"> 
+              @{
+                var strUser = "@"+Model.Username;
+                <a href="#">@strUser</a>
               }
-            }
-          </p>
-        </div>
-      </div>
-      <button type='submit' class="btn btn-outline-primary float-right">Accept Job!</button>
-    </form>
-  </li>
-</ul>
+
+              <p>
+                @{
+                  if(Model.Lastname != null){
+                    @Model.Lastname;
+                  }
+                }
+              </p>
+            </div>
+          </div>
+          <button type='submit' class="btn btn-outline-primary float-right">Accept Job!</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
 

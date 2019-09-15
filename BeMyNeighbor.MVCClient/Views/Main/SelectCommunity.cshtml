@@ -4,4 +4,8 @@
   Layout = "../Shared/_UserMainLayout.cshtml";
 }
 
-@Html.Partial("./_SelectCommunity.cshtml", @Model);
+<div class="container">
+    <main role="main" class="pb-1">
+      @Html.Partial("./_SelectCommunity.cshtml", @Model);
+    </main>
+</div>

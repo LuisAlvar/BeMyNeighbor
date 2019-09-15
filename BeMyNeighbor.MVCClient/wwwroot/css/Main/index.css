@@ -1,0 +1,42 @@
+.UserMainContent{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: auto;
+}
+
+.Map{
+  flex-basis: 30%;
+  height: 100vh;
+}
+
+.UserProfile{
+  flex-basis: 30%;
+  height: 100vh;
+}
+
+.PostFeed{
+  flex-basis: 48%;
+  height: 100vh;
+}
+
+@media(max-width: 988px){
+  .UserMainContent{
+    flex-direction: column;
+  }
+  /*The previous order of stacking the following 
+    three as a columm: userprofile -> .PostFeed -> .Map 
+    
+    Now:
+      its userprofile -> map -> postfeed
+    */
+  .UserProfile{
+    order: 1;
+  }
+  .Map{
+    order: 2;
+  }
+  .PostFeed{
+    order: 3;
+  }
+}

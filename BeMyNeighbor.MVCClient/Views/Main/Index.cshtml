@@ -4,18 +4,23 @@
   Layout = "../Shared/_UserMainLayout.cshtml";
 }
 
-
-<div class="UserMainContent">
+<!-- <div class="row"> -->
+  <div class="UserMainContent col-lg-12">
     <div class="UserProfile">
       <p>UserProfile</p>
+    </div>
+
+    <div class="PostFeed">
+      @Html.Partial("../Shared/Post/_PostForm.cshtml")
+      @Html.Partial("../Shared/Post/_PostItem.cshtml", @Model.UserDb)
     </div>
 
     <div class="Map">
       <p>Map</p>
     </div>
 
-    <div class="PostFeed">
-      <p>PostFeed</p>
-    </div>
-</div>
+
+  </div>
+<!-- </div> -->
+
 
