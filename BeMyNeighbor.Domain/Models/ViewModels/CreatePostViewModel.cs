@@ -1,4 +1,7 @@
 
+using System.Collections.Generic;
+using BeMyNeighbor.Data.Entities;
+
 namespace BeMyNeighbor.Domain.Models.ViewModels{
   public class CreatePostViewModel{
     public int CommunityId { get; set; }

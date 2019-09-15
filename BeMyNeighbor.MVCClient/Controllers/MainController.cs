@@ -16,6 +16,7 @@ namespace BeMyNeighbor.MVCClient.Controllers{
         return RedirectToAction("SelectCommunity", "Main");
         // return View("../Main/_SelectCommunity", CurrentUser.Storage());
       }
+      //reget the post for user 
       //if the user has been verified go to index
       return View(CurrentUser.Storage());
     }

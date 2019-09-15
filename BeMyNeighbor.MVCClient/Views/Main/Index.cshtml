@@ -12,9 +12,8 @@
 
     <div class="PostFeed">
       @Html.Partial("../Shared/Post/_PostForm.cshtml", @Model.CreatePostViewModel)
-      @for(var i = 0; i < 3; ++i){
-        @Html.Partial("../Shared/Post/_PostItem.cshtml", @Model.UserDb)
-      }
+      @Html.Partial("../Shared/Post/_PostItem.cshtml", BeMyNeighbor.Domain.Models.DbModels.PostDbManager.FetchPostsByUsersCommunityId())
+      
     </div>
 
     <div class="Map">

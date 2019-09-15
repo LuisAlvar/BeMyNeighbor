@@ -11,28 +11,45 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
     private PostDbManager(){}
     //Creation
     public static void CreatePost(CreatePostViewModel newPostInfo){
-      DbManager.GetInstance().GeoLocation.Add(new GeoLocation(){
-        Latitude = newPostInfo.lat,
-        Longitude = newPostInfo.lon,
-      });
-      var lastGeolocationRecord = DbManager.GetInstance().GeoLocation.Last();
-      var setDateTime = DateTime.Now;
+      try
+      {
+        var location =  new GeoLocation();
+        location.Latitude = 2.43M;
+        location.Longitude = 3.44M;
 
-      DbManager.GetInstance().Post.Add(new Post(){
-        GeoLocationId = lastGeolocationRecord.GeoLocationId,
-        CommunityId =  newPostInfo.CommunityId,
-        DatePosted =  setDateTime,
-        DateModified = setDateTime,
-        UserId = CurrentUser.Storage().UserDb.UserId,
-        DoneFlag = false,
-        TaskTypeId = newPostInfo.TaskTypeId
-      });
+        var setDateTime = DateTime.Now;
+        var newPost = new Post();
+        newPost.User = CurrentUser.Storage().UserDb;
+        newPost.GeoLocation = location;
+        newPost.Community = DbManager.GetInstance().Community.Single( c => c.CommunityId ==  CurrentUser.Storage().UserDb.CommunityId);
+        newPost.TaskType = DbManager.GetInstance().Task.Single(t => t.TaskTypeId ==  newPostInfo.TaskTypeId);
+        newPost.DatePosted = setDateTime;
+        newPost.DateModified = setDateTime;
+        newPost.DoneFlag = false;
 
-      DbManager.GetInstance().SaveChanges();
+        DbManager.GetInstance().Post.Add(newPost);
+
+        DbManager.GetInstance().SaveChanges();          
+      }
+      catch (System.Exception)
+      {
+          
+          throw;
+      }
     }
     //Fetching 
     public static List<Post> FetchPostsByCommunityId(int commId){
       return DbManager.GetInstance().Post.Where(p => p.CommunityId == commId).ToList();
+    }
+    public static List<Tuple<User,Post>> FetchPostsByUsersCommunityId(){
+      List<Tuple<User, Post>> a =  new List<Tuple<User, Post>>();
+      var postList = DbManager.GetInstance().Post.Where(p => p.CommunityId == CurrentUser.Storage().UserDb.CommunityId).ToList();
+      foreach (var post in postList)
+      {
+          var currentUser =  DbManager.GetInstance().User.Single(u => u.UserId == post.UserId); 
+          a.Add(Tuple.Create(currentUser, post));
+      }
+      return a;
     }
     public static List<Post> FetchPostsByGeoLocationId(int geoId){
       return DbManager.GetInstance().Post.Where(p => p.GeoLocationId == geoId).ToList();
