@@ -119,6 +119,8 @@ namespace BeMyNeighbor.Data.Entities
 
                 entity.Property(e => e.PostId).HasColumnName("PostID");
 
+                entity.Property(e => e.CommentTxt).IsRequired();
+
                 entity.Property(e => e.CommunityId).HasColumnName("CommunityID");
 
                 entity.Property(e => e.GeoLocationId).HasColumnName("GeoLocationID");
@@ -148,9 +150,14 @@ namespace BeMyNeighbor.Data.Entities
                     .HasConstraintName("TaskType_FK");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.Post)
+                    .WithMany(p => p.PostUser)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("UserId_FK");
+
+                entity.HasOne(d => d.UserSelected)
+                    .WithMany(p => p.PostUserSelected)
+                    .HasForeignKey(d => d.UserSelectedId)
                     .HasConstraintName("UserSelectedId_FK");
             });
 
@@ -183,7 +190,7 @@ namespace BeMyNeighbor.Data.Entities
                 entity.ToTable("User", "Users");
 
                 entity.HasIndex(e => e.Email)
-                    .HasName("UQ__User__A9D105347CB0E472")
+                    .HasName("UQ__User__A9D10534B5EC4FB9")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
