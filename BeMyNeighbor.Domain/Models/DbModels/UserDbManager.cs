@@ -88,6 +88,19 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
       return true;
     }
 
+    public void CommunityListByUserLocation(){
+      CurrentUser.Storage().Messages.SourceType = CurrentUser.Storage().Messages.DestinationType = "/Main/SelectCommunity";
+      try
+      {
+        //FUTURE TASK: Fetch Community based on the users state and city
+        CurrentUser.Storage().CommunityList =  DbManager.GetInstance().Community.ToList();
+      }
+      catch (System.Exception)
+      {
+        CurrentUser.Storage().Messages.MessageType = "UnableToFetchCommunities";
+        CurrentUser.Storage().Messages.MessageToUser = "Unable to find Communities in your area. We apologize for an inconverience.";
+      }
+    }
 
     public bool UserSelectedCommunity(int communityId){
       CurrentUser.Storage().Messages.SourceType = "/Auth/SelectedCommunity";

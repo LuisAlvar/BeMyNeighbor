@@ -22,6 +22,7 @@ namespace BeMyNeighbor.MVCClient.Controllers{
 
     [HttpGet]
     public ViewResult SelectCommunity(){
+      UserDbManager.GetInstance().CommunityListByUserLocation();
       return View(CurrentUser.Storage());
     }
 

@@ -1,6 +1,7 @@
 using BeMyNeighbor.Domain.Models;
 using BeMyNeighbor.Data.Entities;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace BeMyNeighbor.Domain.Models{
   public class CurrentUser{
@@ -28,19 +29,19 @@ namespace BeMyNeighbor.Domain.Models{
 
   public class LocalUser{
     public User UserDb { get; set; }
+    public List<Community> CommunityList { get; set;}
     public Messages Messages { get; set; }
-    public Address AddressDb { get; set;}
 
     //SignIn or SignUp Properties
     [Required(ErrorMessage = "Forget your password!")]
     public string Password { get; set; }
     [Required(ErrorMessage = "Please enter a username or email!")]
     public string UsernameOrEmail { get; set; }
+    [Required(ErrorMessage = "Please select a community.")]
     public int SelectedCommunity { get; set; }
     public LocalUser(){
       UserDb = new User();
       Messages = new Messages();
-      AddressDb = new Address();
     }
     public void CleanMessages(){
       this.Messages = new Messages();

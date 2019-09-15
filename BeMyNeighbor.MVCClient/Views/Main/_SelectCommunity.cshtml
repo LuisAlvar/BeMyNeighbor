@@ -6,7 +6,7 @@
       var stringGreeting = $"Welcome to BeMyNeighbor, {@Model.UserDb.Firstname} {@Model.UserDb.Lastname}!";
       <h4 class="text-center">@stringGreeting</h4>
     }
-    <h6 class="text-center">Please select a community in @Model.UserDb.Address.City</h6>
+    <h6 class="text-center">Select a community in @Model.UserDb.Address.City</h6>
   </div>
 </div>
 
@@ -14,22 +14,28 @@
   <div class="col-md-5">
 
     <form class="d-flex flex-column justify-content-center ml-5" method="Post" action="/main/selectedcommunity">
-      @if(true){
-        <div class="alert alert-danger text-center">You did not select a community</div>
+      @if(@Model.Messages.MessageType == "UnableToFetchCommunities"){
+        <div class="alert alert-danger text-center">@Model.Messages.MessageToUser</div>
       }
+      @if(@Model.Messages.MessageType == "ErrorUpdatingCommunityOfUser"){
+        <div class="alert alert-danger text-center">@Model.Messages.MessageToUser</div>        
+      }
+      <span class="text-center" style="color: red;" asp-validation-for="@Model.SelectedCommunity"></span>
       <fieldset name="CommunityRadioButtons" class="form-group" required>
 
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <input type="radio" aria-label="Radio button for following text input" value="1" asp-for="@Model.SelectedCommunity">
+        @foreach(var communityObject in @Model.CommunityList){
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="radio" aria-label="Radio button for following text input" value="@communityObject.CommunityId" asp-for="@Model.SelectedCommunity">
+              </div>
             </div>
+            <label type="text" class="form-control">@communityObject.CommunityName</label>
           </div>
-          <label type="text" class="form-control">Liv+</label>
-        </div>
+        }
 
       </fieldset>
-      <button type="submit" class="btn btn-outline-primary float-right">Selected</button>
+      <button type="submit" class="btn btn-outline-primary float-right">Select</button>
     </form>
   </div>
 </div>
