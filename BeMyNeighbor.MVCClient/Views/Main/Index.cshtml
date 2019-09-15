@@ -12,8 +12,9 @@
 
     <div class="PostFeed">
       @Html.Partial("../Shared/Post/_PostForm.cshtml", @Model.CreatePostViewModel)
-      @Html.Partial("../Shared/Post/_PostItem.cshtml", BeMyNeighbor.Domain.Models.DbModels.PostDbManager.FetchPostsByUsersCommunityId())
-      
+      @foreach(var tupleObject in BeMyNeighbor.Domain.Models.DbModels.PostDbManager.FetchPostsByUsersCommunityId()){
+        @Html.Partial("../Shared/Post/_PostItem.cshtml", @tupleObject);
+      }      
     </div>
 
     <div class="Map">

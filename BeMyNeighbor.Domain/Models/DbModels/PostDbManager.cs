@@ -25,6 +25,7 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
         newPost.TaskType = DbManager.GetInstance().Task.Single(t => t.TaskTypeId ==  newPostInfo.TaskTypeId);
         newPost.DatePosted = setDateTime;
         newPost.DateModified = setDateTime;
+        newPost.CommentTxt = newPostInfo.UserComment;
         newPost.DoneFlag = false;
 
         DbManager.GetInstance().Post.Add(newPost);
@@ -44,6 +45,7 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
     public static List<Tuple<User,Post>> FetchPostsByUsersCommunityId(){
       List<Tuple<User, Post>> a =  new List<Tuple<User, Post>>();
       var postList = DbManager.GetInstance().Post.Where(p => p.CommunityId == CurrentUser.Storage().UserDb.CommunityId).ToList();
+      if(postList.Count == 0) return a;
       foreach (var post in postList)
       {
           var currentUser =  DbManager.GetInstance().User.Single(u => u.UserId == post.UserId); 
@@ -60,6 +62,8 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
     public static List<Task> FetchTaskForUser(){
       return DbManager.GetInstance().Task.ToList();
     }
+
+
     //Updating
     public static void EditPost(int id, string newDescription){
       var editingPost = FindPost(id);

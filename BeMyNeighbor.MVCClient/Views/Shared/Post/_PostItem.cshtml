@@ -1,4 +1,4 @@
-@model List<Tuple<BeMyNeighbor.Data.Entities.User, BeMyNeighbor.Data.Entities.Post>>
+@model Tuple<BeMyNeighbor.Data.Entities.User, BeMyNeighbor.Data.Entities.Post>
 <div class="row justify-content-md-center">
   <div class="col-md-10 justify-content-md-center shadow p-3 mb-5 bg-white rounded">
     <ul id="Posts" class="list-group row m-1">
@@ -10,15 +10,17 @@
                 class="timeline-image rounded-circle"
                 src="https://static.intercomassets.com/avatars/1143992/square_128/Tiffany-1491608799.jpg?1491608799">
             <div class="PostText d-flex flex-column ml-3"> 
+              <a href="">@Model.Item1.Username</a>
+              <p>@Model.Item2.CommentTxt</p>
               @{
-                @foreach(var post in @Model){
-                  <a href="">@post.Item1.Username</a>
-                  <p>@post.Item2.PostId</p>
-                }
-              }
+                var taskText = BeMyNeighbor.Domain.Models.DbModels.PostDbManager.FindTask(@Model.Item2.TaskTypeId).TaskDescription;
+                <small>@taskText</small>
+              } 
             </div>
           </div>
-          <button type='submit' class="btn btn-outline-primary float-right">Accept Job!</button>
+          @if(@Model.Item1.Username != BeMyNeighbor.Domain.Models.CurrentUser.Storage().UserDb.Username){
+            <button type='submit' class="btn btn-outline-primary float-right">Accept Job!</button>          
+          }
         </form>
       </li>
     </ul>

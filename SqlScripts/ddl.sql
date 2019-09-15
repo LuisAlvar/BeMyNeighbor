@@ -172,3 +172,6 @@ alter table [Evaluation].[EvaluationQuestions]
 
 alter table [Evaluation].[EvaluationQuestions]
   add CONSTRAINT Question_EvalQuestion_FK FOREIGN KEY (QuestionID) REFERENCES [Evaluation].[Questions] (QuestionID);
+
+alter table [Posts].[Post] alter column UserSelectedId int NULL;
+alter table [Posts].[Post] alter column DateSelected Datatime2 NULL;
