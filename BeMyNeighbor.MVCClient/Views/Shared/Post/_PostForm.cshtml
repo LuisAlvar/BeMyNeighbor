@@ -1,14 +1,15 @@
+@model BeMyNeighbor.Domain.Models.ViewModels.CreatePostViewModel;
 <div class="row justify-content-md-center">
   <div class="col-md-10 justify-content-md-center shadow p-3 mb-5 bg-white rounded">
     <p>New Job Post</p>
     <form action="/Post/Create" method="Post">
       <div class="form-group">
-        <textarea class="form-control" rows="2" placeholder="Add a friendly comment!"></textarea>
+        <input class="form-control" maxlength="100" asp-for="@Model.UserComment">
       </div>
       <fieldset class="form-group">
-        <select class="form-control">
+        <select class="form-control" asp-for="@Model.TaskTypeId">
           <option>Select a Job Type</option>
-          <option>Clean my front lawn.</option>
+          <option value="4">Clean my front lawn.</option>
         </select>
       </fieldset>
       <button type="submit" class="btn btn-outline-primary float-right">Post Neighbor!</button>

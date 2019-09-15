@@ -2,6 +2,7 @@ using BeMyNeighbor.Domain.Models;
 using BeMyNeighbor.Data.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using BeMyNeighbor.Domain.Models.ViewModels;
 
 namespace BeMyNeighbor.Domain.Models{
   public class CurrentUser{
@@ -39,9 +40,13 @@ namespace BeMyNeighbor.Domain.Models{
     public string UsernameOrEmail { get; set; }
     [Required(ErrorMessage = "Please select a community.")]
     public int SelectedCommunity { get; set; }
+    
+    public CreatePostViewModel CreatePostViewModel {get; set;}
+
     public LocalUser(){
       UserDb = new User();
       Messages = new Messages();
+      CreatePostViewModel = new CreatePostViewModel();
     }
     public void CleanMessages(){
       this.Messages = new Messages();

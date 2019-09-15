@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using BeMyNeighbor.Domain.Models;
 using BeMyNeighbor.Domain.Models.DbModels;
+using BeMyNeighbor.Domain.Models.ViewModels;
 
 namespace BeMyNeighbor.MVCClient.Controllers{
   public class PostController: Controller{
@@ -18,7 +19,7 @@ namespace BeMyNeighbor.MVCClient.Controllers{
     [HttpPost]
     public IActionResult Create(CreatePostViewModel model){
       PostDbManager.CreatePost(model);
-      return RedirectToAction("Index", "UseMain");
+      return RedirectToAction("Index", "Main");
     }
 
     public IActionResult CommunityPosts(){

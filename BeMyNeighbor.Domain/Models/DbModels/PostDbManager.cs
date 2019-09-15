@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using BeMyNeighbor.Domain.Models.DbModels;
 using BeMyNeighbor.Domain.Models;
+using BeMyNeighbor.Domain.Models.ViewModels;
 
 namespace BeMyNeighbor.Domain.Models.DbModels{
   public class PostDbManager{
@@ -24,7 +25,7 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
         DateModified = setDateTime,
         UserId = CurrentUser.Storage().UserDb.UserId,
         DoneFlag = false,
-        TaskTypeId = newPostInfo.tasktypeId
+        TaskTypeId = newPostInfo.TaskTypeId
       });
 
       DbManager.GetInstance().SaveChanges();
@@ -75,14 +76,6 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
       return DbManager.GetInstance().Post.Single(p => p.PostId == id);
     }
 
-  }
-
-  public class CreatePostViewModel{
-    public int CommunityId { get; set; }
-    public decimal lat { get; set; }
-    public decimal lon { get; set; }
-    public int tasktypeId { get; set; }
-    public int userId { get; set; }
   }
 
 }
