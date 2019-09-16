@@ -3,7 +3,7 @@ name: $(date:yyyyMMdd)$(rev:rr)
 
 stages:
   - stage: 'build'
-    displayName: 'build-mvc'
+    displayName: 'built-mvc'
     condition: succeeded()
     jobs:
       - job:
@@ -17,6 +17,7 @@ stages:
             inputs:
               version: '2.2.401'
           - script: |
-            dotnet build
+              dotnet build
+
 trigger:
   - master
