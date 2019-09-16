@@ -42,6 +42,11 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 						}
 					);
 					DbManager.GetInstance().SaveChanges();
+
+					int taskReward = TaskDbManager.GetInstance().TaskTypeList.FirstOrDefault
+					(t=> t.TaskTypeId == taskTypeID).TaskTypeRewardPoints;
+
+					UserDbManager.GetInstance().UpdateUserPoints(userID,taskReward);
 			}
 			catch (System.Exception ex){
 				System.Console.WriteLine(ex.ToString());
