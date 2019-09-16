@@ -38,7 +38,7 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 							UserId = userID,
 							TaskTypeId = taskTypeID,
 							EvaluationQuestions = qlist,
-							TotalScore = totalScore
+							TotalScore = totalScore,
 						}
 					);
 					DbManager.GetInstance().SaveChanges();

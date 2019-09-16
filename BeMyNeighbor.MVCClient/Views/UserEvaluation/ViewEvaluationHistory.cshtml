@@ -1,5 +1,5 @@
 @{
-    Layout = "";
+  Layout = "../Shared/_UserMainLayout.cshtml";
 }
 @model List<BeMyNeighbor.Data.Entities.UsersEvaluation>
 
@@ -58,7 +58,7 @@
                     <tr>
                         <td>@(i+1)</td>
                         <td>@item.EvaluationQuestions.ToList()[i].Question.QuestionText</td>
-                        <td>$@item.EvaluationQuestions.ToList()[i].QuestionScore</td>
+                        <td>@item.EvaluationQuestions.ToList()[i].QuestionScore</td>
                     </tr>
                 }    
                 </table>
@@ -67,8 +67,4 @@
             }
         }
     }
-    <form name="ReturnToMainView" id="ReturnToMainView" action="/User/MainView" method="post">
-	    <input type="submit" name= "subButton" value="Return to homepage">
-		@Html.AntiForgeryToken()
-	</form>
 </center>
