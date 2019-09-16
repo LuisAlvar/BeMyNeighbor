@@ -27,18 +27,11 @@ namespace BeMyNeighbor.MVCClient.Controllers
 [HttpPost]
 [ValidateAntiForgeryToken]
         public IActionResult SubmitEvaluation (List<string> QuestionScore){
-            bool flag = EvaluationDbManager.GetInstance().PushEvaluation(QuestionScore,
+            EvaluationDbManager.GetInstance().PushEvaluation(QuestionScore,
             CurrentUser.Storage().CreatePostViewModel.evaluationPostID,
             CurrentUser.Storage().CreatePostViewModel.userId, 
             CurrentUser.Storage().CreatePostViewModel.TaskTypeId);
-
-            if(flag){
-                ViewData["msg"] = "Evaluation Submitted Successfully";
-            }else{
-                ViewData["msg"] = "Error in submitting evaluation";
-            }
-            return View("EvaluationSubmissionReceiptPage");
-
+            return RedirectToAction("Index", "Main");
         }
         
     }

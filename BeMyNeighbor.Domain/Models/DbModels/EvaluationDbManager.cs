@@ -21,6 +21,10 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 
 		public bool PushEvaluation(List<string> QuestionScore, int postID, 
 		int userID, int taskTypeID){
+      CurrentUser.Storage().Messages.SourceType = "/UserEvaluationController";
+      CurrentUser.Storage().Messages.DestinationType = "/Main/Index";
+      CurrentUser.Storage().Messages.DurationOfUser = 1;
+
 			List <EvaluationQuestions> qlist = new List<EvaluationQuestions>();
 			int totalScore =0;
       for (int i=0; i<QuestionScore.Count; i++){
@@ -50,9 +54,12 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 					(t=> t.TaskTypeId == taskTypeID).TaskTypeRewardPoints;
 
 					UserDbManager.GetInstance().UpdateUserPoints(userID,taskReward);
+          CurrentUser.Storage().Messages.MessageType = "SuccessfulyEvaluation";
+          CurrentUser.Storage().Messages.MessageToUser = "Evaluation Submitted Sucessfully";
 			}
-			catch (System.Exception ex){
-				System.Console.WriteLine(ex.ToString());
+			catch (System.Exception){
+          CurrentUser.Storage().Messages.MessageType = "FailedEvaluation";
+          CurrentUser.Storage().Messages.MessageToUser = "Error in Submitting Evaluation";
 					return false;
 			}
 			return true;

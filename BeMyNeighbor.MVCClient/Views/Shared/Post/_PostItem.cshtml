@@ -26,7 +26,7 @@
                 && (Model.Item2.UserSelectedId != BeMyNeighbor.Domain.Models.CurrentUser.Storage().UserDb.UserId)){
             <button type='submit' class="btn btn-outline-primary float-right">Accept Job!</button>          
           }
-          @if(@Model.Item2.UserSelectedId == @Model.Item2.UserSelected.UserId){
+          @if(@Model.Item2.UserSelectedId == BeMyNeighbor.Domain.Models.CurrentUser.Storage().UserDb.UserId){
               <small class="float-right">Selected by @Model.Item2.UserSelected.Username</small>
           }
 
