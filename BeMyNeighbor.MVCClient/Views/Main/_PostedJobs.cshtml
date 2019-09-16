@@ -19,15 +19,13 @@
 								<small>Job Done?: @Model.DoneFlag</small>
               } 
             </div>
-          </div>
-          @if(@Model.DoneFlag == true){
-					
+          </div>					
             <input type=hidden name="postID" value =@Model.PostId>
             <input type=hidden name="selectedUserID" value =@Model.UserSelectedId>
             <input type=hidden name="taskTypeID" value =@Model.TaskTypeId>
-            <button type='submit' class="btn btn-outline-primary float-right">Evaluate Now!</button>   
+            <button type='submit' class="btn btn-outline-primary float-right">Mark as done and evaluate now!</button>   
 						      @Html.AntiForgeryToken()       
-          }
+          
         </form>
       </li>
     </ul>

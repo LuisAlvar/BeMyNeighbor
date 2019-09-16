@@ -32,6 +32,9 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 					totalScore+= (int) Convert.ToUInt32(QuestionScore[i]);
       }
 			try{
+
+					PostDbManager.UpdatePostDoneFlag(postID);
+					
 					DbManager.GetInstance().UsersEvaluation.Add(
 						new UsersEvaluation{
 							PostId = postID,

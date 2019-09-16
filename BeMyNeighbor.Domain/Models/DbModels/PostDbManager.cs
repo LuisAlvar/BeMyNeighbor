@@ -133,6 +133,18 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
       }
       return pList;
     }
+        public static void UpdatePostDoneFlag (int postID){
+      
+      try{
+          var res = DbManager.GetInstance().Post.Single(c => c.PostId == postID);
+          res.DoneFlag = true;
+          DbManager.GetInstance().Attach(res);
+          DbManager.GetInstance().SaveChanges();
+      }catch (System.Exception ex){
+          System.Console.WriteLine(ex.ToString());;
+      }
+    } 
+
 
   }
 
