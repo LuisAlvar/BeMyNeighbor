@@ -19,5 +19,36 @@ stages:
           - script: |
               dotnet build
 
+  - stage: 'test'
+    displayName: 'test-mvc'
+    condition: succeeded()
+    jobs:
+      - job:
+        condition: succeeded()
+        displayName: 'test-job'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'dotnet installer'
+            inputs:
+              version: '2.2.401'
+          - script: |
+              dotnet tool install --global dotnet-sonarscanner
+              dotnet sonarscanner begin /k:"LuisAlvar_BeMyNeighbor" /o:"luisalvar" /d:sonar.login="146b8037eff9ada6a4bd0a603ae7102c5ac4b20e" /d:sonar.host.url="https://sonarcloud.io"
+              dotnet build
+              dotnet test --logger trx -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=\"cobertura,opencover\" -p:Exclude=[xunit*]*
+              dotnet sonarscanner end /d:sonar.login="146b8037eff9ada6a4bd0a603ae7102c5ac4b20e"
+          - task: PublishTestResults@2
+            displayName: 'publish result::unit-test'
+            inputs:
+              testRunner: VSTest
+              testResultsFiles: '**/*.trx'
+          - task: PublishCodeCoverageResults@1
+            displayName: 'publish result::code-coverage'
+            inputs:
+              codeCoverageTool: cobertura
+              summaryFileLocation: '**/coverage.cobertura.xml'
+
 trigger:
   - master
