@@ -1,6 +1,7 @@
 @{
-    Layout = "";
+  Layout = "../Shared/_UserMainLayout.cshtml";
 }
+
 <head>
     <title>Evaluation Submission Receipt</title>
 		<style>
@@ -16,9 +17,4 @@
 	<h1>-- Evaluation Submission Receipt --</h1>
 	<hr>
 	<p>@ViewData["msg"].</p>
-	
-	<form name="ReturnToMainView" id="ReturnToMainView" action="/Home/MainView" method="post">
-		<input type="submit" name= "subButton" value="Return to homepage">
-		@Html.AntiForgeryToken()
-	</form>
-</center>
+	</center>

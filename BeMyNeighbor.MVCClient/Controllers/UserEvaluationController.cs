@@ -2,13 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 using BeMyNeighbor.Domain.Models.DbModels;
 using BeMyNeighbor.Domain.Models;
 using System.Collections.Generic;
+using BeMyNeighbor.Domain.Models.ViewModels;
 using System;
 
 namespace BeMyNeighbor.MVCClient.Controllers
 {
     public class UserEvaluationController : Controller{
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult StartNewEvaluation(int postID,int selectedUserID,int taskTypeID){
 
-        public IActionResult StartNewEvaluation(){
+            CurrentUser.Storage().CreatePostViewModel.userId = selectedUserID;
+            CurrentUser.Storage().CreatePostViewModel.evaluationPostID = postID;
+            CurrentUser.Storage().CreatePostViewModel.TaskTypeId = taskTypeID;
             return View ("EvaluateUser",QuestionsDbManager.GetInstance().QuestionsList);
         }
         public IActionResult ViewEvaluationHistory(){
@@ -19,11 +26,12 @@ namespace BeMyNeighbor.MVCClient.Controllers
 
 [HttpPost]
 [ValidateAntiForgeryToken]
-        public IActionResult SubmitEvaluation (List<string> QuestionScore,
-        string postID,string userID, string taskTypeID){
-            // replace post params with current object like the current user object
+        public IActionResult SubmitEvaluation (List<string> QuestionScore){
             bool flag = EvaluationDbManager.GetInstance().PushEvaluation(QuestionScore,
-            Convert.ToInt32 (postID),Convert.ToInt32(userID),Convert.ToInt32(taskTypeID));
+            CurrentUser.Storage().CreatePostViewModel.evaluationPostID,
+            CurrentUser.Storage().CreatePostViewModel.userId, 
+            CurrentUser.Storage().CreatePostViewModel.TaskTypeId);
+
             if(flag){
                 ViewData["msg"] = "Evaluation Submitted Successfully";
             }else{

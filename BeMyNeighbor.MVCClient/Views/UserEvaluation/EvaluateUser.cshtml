@@ -1,7 +1,7 @@
 @model List<BeMyNeighbor.Data.Entities.Questions>
 
 	@{
-		Layout = null;
+        Layout = "../Shared/_UserMainLayout.cshtml";
 	}
 
 	<head>
@@ -42,9 +42,6 @@
               </tr>
           }    
             </table>
-		<input type=hidden name="postID" value ="1" >
-		<input type=hidden name="userID" value ="1" >
-		<input type=hidden name="taskTypeID" value = "100">
 		<input type="submit" value="Submit Evaluation">
 		@Html.AntiForgeryToken()
 	</form>

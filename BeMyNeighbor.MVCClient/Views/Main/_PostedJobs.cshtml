@@ -3,7 +3,7 @@
   <div class="col-md-10 justify-content-md-center shadow p-3 mb-5 bg-white rounded">
     <ul id="Posts" class="list-group row m-1">
       <li class="list-group-item">
-        <form>
+        <form action = "/UserEvaluation/StartNewEvaluation" method = "post">
           <div class="PostContext d-flex">
             <img height='60'
                 weight='60'
@@ -21,7 +21,12 @@
             </div>
           </div>
           @if(@Model.DoneFlag == true){
-            <button type='submit' class="btn btn-outline-primary float-right">Evaluate Now!</button>          
+					
+            <input type=hidden name="postID" value =@Model.PostId>
+            <input type=hidden name="selectedUserID" value =@Model.UserSelectedId>
+            <input type=hidden name="taskTypeID" value =@Model.TaskTypeId>
+            <button type='submit' class="btn btn-outline-primary float-right">Evaluate Now!</button>   
+						      @Html.AntiForgeryToken()       
           }
         </form>
       </li>
