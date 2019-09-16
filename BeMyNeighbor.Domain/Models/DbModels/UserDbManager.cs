@@ -121,7 +121,20 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
         return false;
       }
       return true;
+    }
+
+    public void UpdateUserPoints(int userID, int NumOfPoints){
+      
+      try{
+          var res = DbManager.GetInstance().User.Single(c => c.UserId == userID);
+          res.NubmerOfPoints = res.NubmerOfPoints + NumOfPoints;
+          DbManager.GetInstance().Attach(res);
+          DbManager.GetInstance().SaveChanges();
+
+      }catch (System.Exception ex){
+          System.Console.WriteLine(ex.ToString());;
+      }
     } 
         
-    }
+  }
 }
