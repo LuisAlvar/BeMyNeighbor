@@ -36,5 +36,9 @@ namespace BeMyNeighbor.MVCClient.Controllers{
       return RedirectToAction("Index", "Main");
     }
 
+    public IActionResult ViewJobList(){
+      return View("JobsList",PostDbManager.FetchPostsLinkedWithUserID(CurrentUser.Storage().UserDb.UserId));
+    }
+
   }
 }
