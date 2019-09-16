@@ -56,6 +56,7 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
 					UserDbManager.GetInstance().UpdateUserPoints(userID,taskReward);
           CurrentUser.Storage().Messages.MessageType = "SuccessfulyEvaluation";
           CurrentUser.Storage().Messages.MessageToUser = "Evaluation Submitted Sucessfully";
+					PostDbManager.UpdatePostEvaluatedFlag(postID);
 			}
 			catch (System.Exception){
           CurrentUser.Storage().Messages.MessageType = "FailedEvaluation";

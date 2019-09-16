@@ -123,6 +123,8 @@ namespace BeMyNeighbor.Data.Entities
 
                 entity.Property(e => e.CommunityId).HasColumnName("CommunityID");
 
+                entity.Property(e => e.EvaluatedFlag).HasColumnName("evaluatedFlag");
+
                 entity.Property(e => e.GeoLocationId).HasColumnName("GeoLocationID");
 
                 entity.Property(e => e.TaskTypeId).HasColumnName("TaskTypeID");

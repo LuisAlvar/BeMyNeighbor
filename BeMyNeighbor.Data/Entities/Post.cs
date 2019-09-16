@@ -21,6 +21,7 @@ namespace BeMyNeighbor.Data.Entities
         public DateTime DateSelected { get; set; }
         public int? UserSelectedId { get; set; }
         public string CommentTxt { get; set; }
+        public bool? EvaluatedFlag { get; set; }
 
         public virtual Community Community { get; set; }
         public virtual GeoLocation GeoLocation { get; set; }

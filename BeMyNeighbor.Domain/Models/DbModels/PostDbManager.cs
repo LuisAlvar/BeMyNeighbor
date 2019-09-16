@@ -145,6 +145,19 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
       }
     } 
 
+    public static void UpdatePostEvaluatedFlag (int postID){
+      
+      try{
+          var res = DbManager.GetInstance().Post.Single(c => c.PostId == postID);
+          res.EvaluatedFlag = true;
+          DbManager.GetInstance().Attach(res);
+          DbManager.GetInstance().SaveChanges();
+      }catch (System.Exception ex){
+          System.Console.WriteLine(ex.ToString());;
+      }
+    } 
+
+
 
   }
 

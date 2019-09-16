@@ -103,6 +103,8 @@ create table [Posts].[Post](
   UserSelectedID int not null,
 );
 alter table [Posts].[Post] add CommentTxt nvarchar (max) not null
+alter table [Posts].[Post] add evaluatedFlag bit not null
+
 alter table [Posts].[Post]
   add CONSTRAINT Post_PK PRIMARY KEY (PostID);
 
