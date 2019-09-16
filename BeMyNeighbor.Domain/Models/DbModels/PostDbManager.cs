@@ -97,6 +97,20 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
       return DbManager.GetInstance().Post.Single(p => p.PostId == id);
     }
 
+    public static List<Post> FetchPostsLinkedWithUserID(int userID){
+      List<Post> pList = new List<Post>();
+      try{
+         pList = DbManager.GetInstance()
+         .Post.Where(p=> p.UserId == userID || p.UserSelected.UserId == userID 
+         || (int) p.UserSelectedId == userID).ToList(); 
+      }
+      catch (System.Exception ex){
+        System.Console.WriteLine(ex.ToString());
+      }
+      return pList;
+    }
+
   }
+
 
 }

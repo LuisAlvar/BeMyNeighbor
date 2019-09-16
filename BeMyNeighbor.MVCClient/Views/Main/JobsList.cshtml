@@ -1,0 +1,24 @@
+@model List<BeMyNeighbor.Data.Entities.Post>
+@{
+  Layout = "../Shared/_UserMainLayout.cshtml";
+}
+  <div class="UserMainContent col-lg-12">
+    <div class="UserProfile">
+			@foreach (var item in Model){
+				@if (@item.UserId != @item.UserSelectedId
+				&& @item.UserId == BeMyNeighbor.Domain.Models.CurrentUser.Storage().UserDb.UserId){
+						@Html.Partial("_PostedJobs",@item)
+				}
+			}
+    </div>
+
+		<div class="PostFeed">
+			@foreach (var item in Model){
+				@if (@item.UserId != BeMyNeighbor.Domain.Models.CurrentUser.Storage().UserDb.UserId){
+						@Html.Partial("_AssignedJobs",@item)
+				}
+			}
+
+    </div>
+
+

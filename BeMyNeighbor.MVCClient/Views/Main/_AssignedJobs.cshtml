@@ -1,5 +1,4 @@
-@model BeMyNeighbor.Data.Entities.User;
-
+@model BeMyNeighbor.Data.Entities.Post
 <div class="row justify-content-md-center">
   <div class="col-md-10 justify-content-md-center shadow p-3 mb-5 bg-white rounded">
     <ul id="Posts" class="list-group row m-1">
@@ -10,25 +9,18 @@
                 class="timeline-image rounded-circle"
                 src="https://static.intercomassets.com/avatars/1143992/square_128/Tiffany-1491608799.jpg?1491608799">
             <div class="PostText d-flex flex-column ml-3"> 
+              <a href="">@Model.User.Username</a>
+              <p>@Model.CommentTxt</p>
               @{
-                var strUser = "@"+Model.Username;
-                <a href="#">@strUser</a>
-              }
-
-              <p>
-                @{
-									 <pre>@Model.Firstname @Model.Lastname</pre>
-									 <pre>@Model.Address.City, @Model.Address.StateProvince</pre>
-                    <pre>#of points: @Model.NubmerOfPoints</pre>
-                  }
-                
-              </p>
+                <small>Task Description: @Model.TaskType.TaskDescription</small>
+								<small>Reward Points: @Model.TaskType.TaskTypeRewardPoints</small>
+								<small>Date Posted: @Model.DatePosted</small>
+                <small>You Accepted Job on: @Model.DateSelected</small>
+								<small>Job Done?: @Model.DoneFlag</small>
+              } 
             </div>
           </div>
       </li>
     </ul>
   </div>
 </div>
-
-
-
