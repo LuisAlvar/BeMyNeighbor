@@ -22,7 +22,7 @@ namespace BeMyNeighbor.Test.MVCClient.Controllers{
           });
           var view = mn.Index();
           Assert.NotNull(view);
-			    Assert.IsType<ViewResult>(view);
+          Assert.IsNotType<IActionResult>(view);    
         } 
     }
 }

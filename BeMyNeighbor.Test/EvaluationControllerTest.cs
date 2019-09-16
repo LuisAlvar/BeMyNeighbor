@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Xunit; 
 using BeMyNeighbor.MVCClient.Controllers;
+using System.Collections.Generic;
+
 namespace BeMyNeighbor.Test
 {
     public class EvaluationControllerTest{
@@ -11,17 +13,8 @@ namespace BeMyNeighbor.Test
             var eval = new UserEvaluationController();
             var view = eval.StartNewEvaluation(1,1,1);
             Assert.NotNull(view);
-			Assert.IsType<ViewResult>(view);
+		      	Assert.IsNotType<IActionResult>(view);
         }
 
-        [Fact]
-        public void TestEvaluationSubmission(){
-            var eval = new UserEvaluationController();
-            var view = eval.SubmitEvaluation(new System.Collections.Generic.List<string>{
-                "1","1"
-            });
-            Assert.NotNull(view);
-			Assert.IsType<ViewResult>(view);
-        }
     }
 }
