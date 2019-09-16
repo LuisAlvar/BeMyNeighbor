@@ -14,11 +14,11 @@ namespace BeMyNeighbor.MVCClient
     {
         public static void Main()
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateWebHostBuilder().Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder() =>
+            WebHost.CreateDefaultBuilder()
                 .UseStartup<Startup>();
     }
 }
