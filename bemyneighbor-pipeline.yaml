@@ -78,5 +78,6 @@ stages:
               command: 'logout'
               containerRegistry: 'bemyneighbor-revatureproject2'
             displayName: 'docker logout'
+##deploy
 trigger:
   - master
