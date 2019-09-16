@@ -4,7 +4,12 @@
   Layout = "../Shared/_UserMainLayout.cshtml";
 }
 
-<!-- <div class="row"> -->
+<div>
+  @if(@Model.Messages.MessageType == "UnableToAcceptPost"){
+    <div class="row justify-content-md-center">
+          <div class="row alert alert-danger justify-content-center col-md-5">@Model.Messages.MessageToUser</div>
+    </div>
+  }
   <div class="UserMainContent col-lg-12">
     <div class="UserProfile">
         @Html.Partial("../Shared/_UserProfile.cshtml", @Model.UserDb)
@@ -20,9 +25,7 @@
     <div class="Map">
       <p>Map</p>
     </div>
-
-
   </div>
-<!-- </div> -->
+</div>
 
 

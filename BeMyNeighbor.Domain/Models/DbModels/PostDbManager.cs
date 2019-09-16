@@ -83,6 +83,30 @@ namespace BeMyNeighbor.Domain.Models.DbModels{
       DbManager.GetInstance().SaveChanges();
     }
 
+    public static bool SelectedOtherUsersPost(int selectedPostId){
+      var dateTime =  DateTime.Now;
+      CurrentUser.Storage().Messages.SourceType  = "/Main/SelectedOtherOtherUsersPost";
+
+      try
+      {
+        var fetchPost = FindPost(selectedPostId);
+        fetchPost.UserSelected =  CurrentUser.Storage().UserDb;
+        fetchPost.DateSelected =  dateTime;
+        fetchPost.DoneFlag = false;
+        DbManager.GetInstance().Post.Update(fetchPost);
+        DbManager.GetInstance().SaveChanges();
+      }
+      catch (System.Exception)
+      {
+        CurrentUser.Storage().Messages.MessageType = "UnableToAcceptPost";
+        CurrentUser.Storage().Messages.MessageToUser = "We are having service issues! We are currently working on it.";
+        CurrentUser.Storage().Messages.DestinationType = "/Main/Index";
+        CurrentUser.Storage().Messages.DurationOfUser = 1;
+        return false;
+      }
+      return true;
+    }
+
     //Deleting
     public static void DeletePost(int id){
       DbManager.GetInstance().Post.Remove(FindPost(id));

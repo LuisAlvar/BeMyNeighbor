@@ -20,6 +20,7 @@
   height: 100vh;
 }
 
+
 @media(max-width: 988px){
   .UserMainContent{
     flex-direction: column;

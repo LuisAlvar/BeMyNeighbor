@@ -5,6 +5,7 @@ using BeMyNeighbor.Domain.Models.DbModels;
 namespace BeMyNeighbor.MVCClient.Controllers{
   public class MainController: Controller{
     public IActionResult Index(){
+
       /*
         We are routing as such to preserve the unqiue URI
       */
@@ -16,6 +17,10 @@ namespace BeMyNeighbor.MVCClient.Controllers{
         return RedirectToAction("SelectCommunity", "Main");
         // return View("../Main/_SelectCommunity", CurrentUser.Storage());
       }
+      if(CurrentUser.Storage().Messages.DestinationType != "/Main/Index"){
+        CurrentUser.Storage().CleanMessages();
+      }
+      CurrentUser.Storage().Messages.ReduceDuration();
       //reget the post for user 
       //if the user has been verified go to index
       return View(CurrentUser.Storage());
@@ -33,6 +38,12 @@ namespace BeMyNeighbor.MVCClient.Controllers{
       UserDbManager.GetInstance().UserSelectedCommunity(info.SelectedCommunity);
       var userCur = CurrentUser.Storage().UserDb;
       // return View("../Main/Index", CurrentUser.Storage());
+      return RedirectToAction("Index", "Main");
+    }
+
+    [HttpPost]
+    public IActionResult SelectedJob(int selectedPostId){
+      PostDbManager.SelectedOtherUsersPost(selectedPostId);
       return RedirectToAction("Index", "Main");
     }
 

@@ -3,24 +3,33 @@
   <div class="col-md-10 justify-content-md-center shadow p-3 mb-5 bg-white rounded">
     <ul id="Posts" class="list-group row m-1">
       <li class="list-group-item">
-        <form>
-          <div class="PostContext d-flex">
-            <img height='60'
-                weight='60'
-                class="timeline-image rounded-circle"
-                src="https://static.intercomassets.com/avatars/1143992/square_128/Tiffany-1491608799.jpg?1491608799">
-            <div class="PostText d-flex flex-column ml-3"> 
-              <a href="">@Model.Item1.Username</a>
-              <p>@Model.Item2.CommentTxt</p>
-              @{
-                var taskText = BeMyNeighbor.Domain.Models.DbModels.PostDbManager.FindTask(@Model.Item2.TaskTypeId).TaskDescription;
-                <small>@taskText</small>
-              } 
+        <form action="/Main/SelectedJob" method="Post">
+          <fieldset>
+            <input value="@Model.Item2.PostId" style="visibility: hidden; margin-top:-30px;" name="selectedPostId"/>
+            <div class="PostContext d-flex" style="margin-top: -18px;">
+              <img height='60'
+                  weight='60'
+                  class="timeline-image rounded-circle"
+                  src="https://static.intercomassets.com/avatars/1143992/square_128/Tiffany-1491608799.jpg?1491608799">
+              <div class="PostText d-flex flex-column ml-3"> 
+                <a href="">@Model.Item1.Username</a>
+                <p>@Model.Item2.CommentTxt</p>
+                @{
+                  var taskText = BeMyNeighbor.Domain.Models.DbModels.PostDbManager.FindTask(@Model.Item2.TaskTypeId).TaskDescription;
+                  <small>@taskText</small>
+                } 
+              </div>
             </div>
-          </div>
-          @if(@Model.Item1.Username != BeMyNeighbor.Domain.Models.CurrentUser.Storage().UserDb.Username){
+          </fieldset>
+
+          @if((@Model.Item1.Username != BeMyNeighbor.Domain.Models.CurrentUser.Storage().UserDb.Username)
+                && (Model.Item2.UserSelectedId != BeMyNeighbor.Domain.Models.CurrentUser.Storage().UserDb.UserId)){
             <button type='submit' class="btn btn-outline-primary float-right">Accept Job!</button>          
           }
+          @if(@Model.Item2.UserSelectedId == @Model.Item2.UserSelected.UserId){
+              <small class="float-right">Selected by @Model.Item2.UserSelected.Username</small>
+          }
+
         </form>
       </li>
     </ul>
