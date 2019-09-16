@@ -67,7 +67,7 @@ stages:
           - task: Docker@2
             inputs:
               command: 'login'
-              containerRegistry: 'Devopsdemo'
+              containerRegistry: 'bemyneighbor'
             displayName: 'docker login'
           - script: |
               docker image build --file Dockerfile --tag bemyneighbor .
@@ -76,7 +76,7 @@ stages:
           - task: Docker@2
             inputs:
               command: 'logout'
-              containerRegistry: 'Devopsdemo'
+              containerRegistry: 'bemyneighbor'
             displayName: 'docker logout'
 ##deploy
 trigger:
