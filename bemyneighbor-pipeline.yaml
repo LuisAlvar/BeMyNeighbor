@@ -53,6 +53,6 @@ stages:
             inputs:
               codeCoverageTool: cobertura
               summaryFileLocation: '**/coverage.cobertura.xml'
-
+#Deployment stage
 trigger:
   - master
