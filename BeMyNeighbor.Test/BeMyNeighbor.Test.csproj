@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< Updated upstream
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+=======
+    <PackageReference Include="microsoft.aspnetcore.mvc" Version="2.2.0" />
+>>>>>>> Stashed changes
     <PackageReference Include="microsoft.entityframeworkcore" Version="2.2.6" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <PackageReference Include="xunit" Version="2.4.0" />
