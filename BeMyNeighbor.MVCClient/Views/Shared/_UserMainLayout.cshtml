@@ -31,26 +31,21 @@
                 </button>
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <!-- <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li> -->
+                      <li class="nav-item">
+                              <a class="nav-link text-dark" asp-controller="Main" asp-action="Index"><i class="fas fa-newspaper"></i> PostFeed</a>
+                          </li>
+
+                      <li class="nav-item">
+                              <a class="nav-link text-dark" asp-controller="Main" asp-action="ViewJobList"><i class="far fa-list-alt"></i> JobList</a>
+                          </li>
+                      <li class="nav-item">
+                              <a class="nav-link text-dark" asp-controller="UserEvaluation" asp-action="ViewEvaluationHistory"><i class="fas fa-clipboard"></i> EvalHistory</a>
+                      </li>
                     </ul>
                     <ul class="navbar-nav mt-2 mt-lg-0">
-                    <li class="nav-item">
-                            <a class="nav-link text-dark float-right" asp-controller="Main" asp-action="Index">News Feed</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark float-right"><i class="fas fa-cog"></i></a>
                         </li>
-
-                    <li class="nav-item">
-                            <a class="nav-link text-dark float-right" asp-controller="Main" asp-action="ViewJobList">Job List</a>
-                        </li>
-                    <li class="nav-item">
-                            <a class="nav-link text-dark float-right" asp-controller="UserEvaluation" asp-action="ViewEvaluationHistory">Evaluation History</a>
-                        </li>
-
-
                         <li class="nav-item">
                             <a class="nav-link text-dark float-right" asp-controller="Auth" asp-action="Logout">Logout</a>
                         </li>
