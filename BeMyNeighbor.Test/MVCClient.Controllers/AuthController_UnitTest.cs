@@ -4,6 +4,6 @@ using Xunit;
 
 namespace BeMyNeighbor.Test.MVCClient.Controllers{
   public class AuthController_UnitTest{
-
+    
   }
 }
