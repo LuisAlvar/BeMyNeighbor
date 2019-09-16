@@ -1,6 +1,7 @@
 #deveops - pipeline
 #
 #
+#
 name: $(date:yyyyMMdd)$(rev:rr)
 
 stages:
