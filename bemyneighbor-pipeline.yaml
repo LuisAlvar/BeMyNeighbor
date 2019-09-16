@@ -54,5 +54,29 @@ stages:
               codeCoverageTool: cobertura
               summaryFileLocation: '**/coverage.cobertura.xml'
 #Deployment stage
+  - stage: 'pack'
+    displayName: 'pack-mvc'
+    condition: succeeded()
+    jobs:
+      - job:
+        condition: succeeded()
+        displayName: 'pack-job'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - task: Docker@2
+            inputs:
+              command: 'login'
+              containerRegistry: 'bemyneighbor-revatureproject2'
+            displayName: 'docker login'
+          - script: |
+              docker image build --file Dockerfile --tag bemyneighbor .
+              docker image tag bemyneighbor luisenalvar/bemyneighbor-revatureproject2
+              docker push luisenalvar/bemyneighbor-revatureproject2
+          - task: Docker@2
+            inputs:
+              command: 'logout'
+              containerRegistry: 'bemyneighbor-revatureproject2'
+            displayName: 'docker logout'
 trigger:
   - master
