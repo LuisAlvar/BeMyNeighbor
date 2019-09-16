@@ -1,21 +1,20 @@
 #Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
 #For more information, please see https://aka.ms/containercompat
 
-FROM mcr.microsoft.com/dotnet/core/runtime:2.2-nanoserver-1809 AS base
-WORKDIR /app
-
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-nanoserver-1809 AS build
-WORKDIR /src
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS BeMyNeighborBuildStage
+WORKDIR /aspnetmvc
 COPY ["BeMyNeighbor.MVCClient/BeMyNeighbor.MVCClient.csproj", "BeMyNeighbor.MVCClient/"]
-RUN dotnet restore "BeMyNeighbor.MVCClient/BeMyNeighbor.MVCClient.csproj"
+# /root/aspnetmvc/BeMyNeighbor.MVCClient -> created this directory based on the previous step
+# restore /root/aspnetmvc/BeMyNeighbor.MVCClient/BeMyNeighbor.MVCClient.csproj
+RUN dotnet restore BeMyNeighbor.MVCClient/BeMyNeighbor.MVCClient.csproj
 COPY . .
-WORKDIR "/src/BeMyNeighbor.MVCClient"
-RUN dotnet build "BeMyNeighbor.MVCClient.csproj" -c Release -o /app/build
+WORKDIR /aspnetmvc/BeMyNeighbor.MVCClient
+RUN dotnet build BeMyNeighbor.MVCClient.csproj
 
-FROM build AS publish
-RUN dotnet publish "BeMyNeighbor.MVCClient.csproj" -c Release -o /app/publish
+FROM BeMyNeighborBuildStage AS BeMyNeighborPublishStage
+RUN dotnet publish BeMyNeighbor.MVCClient.csproj --no-restore -c Release -o /app
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BeMyNeighbor.MVCClient.dll"]
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+WORKDIR /deploy
+COPY --from=BeMyNeighborPublishStage /app .
+CMD ["dotnet", "BeMyNeighbor.MVCClient.dll"]
