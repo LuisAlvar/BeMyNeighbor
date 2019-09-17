@@ -6,12 +6,12 @@ using BeMyNeighbor.Domain.Models.ViewModels;
 
 namespace BeMyNeighbor.MVCClient.Controllers{
   public class PostController: Controller{
-    public IActionResult Index(){
+    public RedirectToActionResult Index(){
       return RedirectToAction("Index", "Home");
     }
 
     [HttpGet]
-    public IActionResult Create(){
+    public ViewResult Create(){
     
       return View(new CreatePostViewModel());
     }
