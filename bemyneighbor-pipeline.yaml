@@ -78,6 +78,7 @@ stages:
               command: 'logout'
               containerRegistry: 'bemyneighbor'
             displayName: 'docker logout'
+#Deployment stage
   - stage: 'deploy'
     displayName: 'deploy-mvc'
     condition: succeeded('pack')
@@ -98,6 +99,5 @@ stages:
               containers: 'luisenalvar/bemyneighbor-revatureproject2'
           - script: |
               echo 'deploy is done.......' 
-##deploy
 trigger:
   - master
