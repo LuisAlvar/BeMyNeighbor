@@ -78,6 +78,26 @@ stages:
               command: 'logout'
               containerRegistry: 'bemyneighbor'
             displayName: 'docker logout'
+  - stage: 'deploy'
+    displayName: 'deploy-mvc'
+    condition: succeeded('pack')
+    dependsOn:
+      - pack
+      - test
+    jobs:
+      - job:
+        condition: succeeded()
+        displayName: 'deploy-job'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - task: AzureWebAppContainer@1
+            inputs:
+              azureSubscription: 'luisenalvar-pay-as-you-go(20bf099c-f263-45fa-87fb-90df5d644874)'
+              appName: 'BeMyNeighbor'
+              containers: 'luisenalvar/bemyneighbor-revatureproject2'
+          - script: |
+              echo 'deploy is done.......' 
 ##deploy
 trigger:
   - master
