@@ -33,7 +33,7 @@ namespace BeMyNeighbor.MVCClient.Controllers{
     }
 
     [HttpPost]
-    public IActionResult SelectedCommunity(LocalUser info){
+    public RedirectToActionResult SelectedCommunity(LocalUser info){
       //here is where we are going to verify the user 
       UserDbManager.GetInstance().UserSelectedCommunity(info.SelectedCommunity);
       var userCur = CurrentUser.Storage().UserDb;
@@ -42,12 +42,12 @@ namespace BeMyNeighbor.MVCClient.Controllers{
     }
 
     [HttpPost]
-    public IActionResult SelectedJob(int selectedPostId){
+    public RedirectToActionResult SelectedJob(int selectedPostId){
       PostDbManager.SelectedOtherUsersPost(selectedPostId);
       return RedirectToAction("Index", "Main");
     }
 
-    public IActionResult ViewJobList(){
+    public ViewResult ViewJobList(){
       return View("JobsList",PostDbManager.FetchPostsLinkedWithUserID(CurrentUser.Storage().UserDb.UserId));
     }
 
