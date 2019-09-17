@@ -24,5 +24,12 @@ namespace BeMyNeighbor.Test.MVCClient.Controllers{
         //   Assert.NotNull(view);
         //   Assert.IsNotType<IActionResult>(view);    
         // } 
+      [Fact]
+      public void SelectCommunity_Test(){
+        var mainController = new MainController();
+        var view = mainController.SelectCommunity();
+        Assert.NotNull(view);
+        Assert.IsType<ViewResult>(view);
+      }
     }
 }
