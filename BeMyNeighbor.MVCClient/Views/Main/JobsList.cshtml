@@ -2,8 +2,9 @@
 @{
   Layout = "../Shared/_UserMainLayout.cshtml";
 }
-  <div class="UserMainContent col-lg-12">
-    <div class="UserProfile">
+  <div class="UserMainContent col-lg-11">
+    <div class="PostHistory col-lg-5">
+      <h4 class="ml-4">Post History</h4>
 			@foreach (var item in Model){
 				@if (@item.UserId != @item.UserSelectedId
 				&& @item.UserId == BeMyNeighbor.Domain.Models.CurrentUser.Storage().UserDb.UserId){
@@ -12,7 +13,8 @@
 			}
     </div>
 
-		<div class="PostFeed">
+		<div class="WorkList col-lg-6">
+      <h4 class="ml-5">Your WorkList</h4>
 			@foreach (var item in Model){
 				@if (@item.UserId != BeMyNeighbor.Domain.Models.CurrentUser.Storage().UserDb.UserId){
 						@Html.Partial("_AssignedJobs",@item)

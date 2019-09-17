@@ -16,7 +16,7 @@
                 <small>Task Description: @Model.TaskType.TaskDescription</small>
 								<small>Date Posted: @Model.DatePosted</small>
                 <small>Date Selected: @Model.DateSelected</small>
-								<small>Job Done?: @Model.DoneFlag</small>
+								<small>Job Done? @Model.DoneFlag</small>
               } 
             </div>
           </div>	
@@ -24,9 +24,9 @@
               <input type=hidden name="postID" value =@Model.PostId>
               <input type=hidden name="selectedUserID" value =@Model.UserSelectedId>
               <input type=hidden name="taskTypeID" value =@Model.TaskTypeId>
-              <button type='submit' class="btn btn-outline-primary float-right">Mark as done and evaluate now!</button>   
-						      @Html.AntiForgeryToken()       
-          }				
+              <button type='submit' class="btn btn-outline-primary float-right mt-2">Mark as done and evaluate now!</button>
+          }	
+          @Html.AntiForgeryToken()       			
         </form>
       </li>
     </ul>

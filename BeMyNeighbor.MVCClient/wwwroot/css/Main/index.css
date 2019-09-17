@@ -41,3 +41,13 @@
     order: 3;
   }
 }
+
+/* Job List */
+
+.PostHistory{
+  height: 100vh;
+}
+
+.WorkList{
+  height: 100vh;
+}
